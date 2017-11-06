@@ -32,12 +32,12 @@ public class Main2 {
         for (Filemanager fl : fileFinal) {
             System.out.println("---------------------------------------------");
             for (Integer in : semillaFinal) {
-                Greedy miGreedy = new Greedy(fl, in);
-                miGreedy.getSolucion().calculaRestriccion(fl.getRestricciones());
-                miGreedy.getResultados();
-                BusquedaLocal miBusqueda = new BusquedaLocal(miGreedy.getSolucion(), in);
-                miBusqueda.generaSoluciones(fl, 10000);
-                miBusqueda.getResultados();
+                //Greedy miGreedy = new Greedy(fl, in);
+                //miGreedy.getSolucion().calculaRestriccion(fl.getRestricciones());
+                //miGreedy.getResultados();
+                //BusquedaLocal miBusqueda = new BusquedaLocal(miGreedy.getSolucion(), in);
+                //miBusqueda.generaSoluciones(fl, 10000);
+                //miBusqueda.getResultados();
                 //Grasp miGrasp = new Grasp(fl,in);
                 //int iteraciones=0;
                 //int soluciones=0;
