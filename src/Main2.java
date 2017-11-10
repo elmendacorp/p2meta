@@ -31,6 +31,7 @@ public class Main2 {
 
         for (Filemanager fl : fileFinal) {
             System.out.println("---------------------------------------------");
+
             for (Integer in : semillaFinal) {
                 Greedy miGreedy = new Greedy(fl, in);
                 miGreedy.generaSolucion();
