@@ -7,7 +7,6 @@ public class Greedy {
     private Random rd;
     private Filemanager data;
 
-
     public Greedy(Filemanager datos, int semilla) {
         data = datos;
         rd = new Random();
@@ -16,35 +15,34 @@ public class Greedy {
     }
 
     public void generaSolucion() {
-        time = System.nanoTime();
-        HashMap<Integer, CosteFrecuencia> frecuenciasProcesadas = new HashMap<>();
 
-        int rdn = rd.nextInt(data.getTransmisores().size());
-        int nodo = (Integer) data.getTransmisores().keySet().toArray()[rdn];
-        int frecNodo = data.getTransmisores().get(nodo).getRango();
-        frecNodo = data.getFrecuencias().get(frecNodo).getFrecuencias().get(rd.nextInt(data.getFrecuencias().get(frecNodo).getFrecuencias().size()));
+        time = System.nanoTime();
+
+        int randomPos = rd.nextInt(data.getTransmisores().size());
+        int nodo = (Integer) data.getTransmisores().keySet().toArray()[randomPos];
+        int rangoNodo = data.getTransmisores().get(nodo).getRango();
+        int rangoTam = data.getFrecuencias().get(rangoNodo).getFrecuencias().size();
+
+        int frecNodo = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(rd.nextInt(rangoTam));
         solucionLocal.getFrecuenciasAsignadas().put(nodo, new FrecAsignada(nodo, frecNodo));
 
-
         for (Transmisor t : data.getTransmisores().values()) {
+            HashMap<Integer, CosteFrecuencia> frecuenciasProcesadas = new HashMap<>();
             if (!solucionLocal.getFrecuenciasAsignadas().containsKey(t.getId())) {
                 int puntos = 0;
                 int nuevaFrecuencia = 0;
                 for (Integer fr : data.getFrecuencias().get(t.getRango()).getFrecuencias()) {
                     nuevaFrecuencia = fr;
-                    puntos = puntosFrecuencia(t.getId(), fr);
+                    puntos = calculaPuntosFrec(t.getId(), fr);
                     if (puntos == 0) {
                         break;
                     } else if (!solucionLocal.getFrecuenciasAsignadas().containsKey(fr)) {
                         frecuenciasProcesadas.put(fr, new CosteFrecuencia(fr, puntos));
                     }
-                    puntos = puntosFrecuencia(t.getId(), fr);
-
                 }
 
                 if (puntos == 0) {
-                    if (solucionLocal.getFrecuenciasAsignadas().containsKey(t.getId())) {
-                    } else {
+                    if (!solucionLocal.getFrecuenciasAsignadas().containsKey(t.getId())) {
                         solucionLocal.getFrecuenciasAsignadas().put(t.getId(), new FrecAsignada(t.getId(), nuevaFrecuencia));
                     }
                 } else {
@@ -56,8 +54,7 @@ public class Greedy {
                             elegido = crt.getFrecuencia();
                         }
                     }
-                    if (solucionLocal.getFrecuenciasAsignadas().containsKey(t.getId())) {
-                    } else {
+                    if (!solucionLocal.getFrecuenciasAsignadas().containsKey(t.getId())) {
                         solucionLocal.getFrecuenciasAsignadas().put(t.getId(), new FrecAsignada(t.getId(), elegido));
                     }
                 }
@@ -69,7 +66,7 @@ public class Greedy {
         time = System.nanoTime() - time;
     }
 
-    public int puntosFrecuencia(int posicion, int frecuencia) {
+    public int calculaPuntosFrec(int posicion, int frecuencia) {
         int puntosOriginal = 0;
         for (Restriccion rs : data.getRestricciones().get(posicion)) {
             if (solucionLocal.getFrecuenciasAsignadas().containsKey(rs.getId_restriccion())) {
