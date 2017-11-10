@@ -33,29 +33,8 @@ public class Main2 {
             System.out.println("---------------------------------------------");
             for (Integer in : semillaFinal) {
                 Greedy miGreedy = new Greedy(fl, in);
-                miGreedy.getSolucion().calculaRestriccion(fl.getRestricciones());
+                miGreedy.generaSolucion();
                 miGreedy.getResultados();
-                BusquedaLocal miBusqueda = new BusquedaLocal(miGreedy.getSolucion(), in);
-                miBusqueda.generaSoluciones(fl, 10000);
-                miBusqueda.getResultados();
-                //Grasp miGrasp = new Grasp(fl,in);
-                //int iteraciones=0;
-                //int soluciones=0;
-                //double mediaTiempo=0;
-                //double mediaResultado=0;
-                //while(iteraciones<10000) {
-                //    ++soluciones;
-                //    miGrasp.generaSolucion();
-                //    miGrasp.getResultados();
-                //    BLGrasp miBLGrasp = new BLGrasp(miGrasp.getSolucion(), in);
-                //    miBLGrasp.generaSoluciones(fl, 10000, 400);
-                //    miBLGrasp.getResultados();
-                //    iteraciones += miBLGrasp.iteracionesConsumidas();
-                //    mediaTiempo+=miBLGrasp.getTime();
-                //    mediaTiempo+=miGrasp.getTime();
-                 //   mediaResultado+=miBLGrasp.getPuntuacion();
-                //}
-                //System.out.println("Media de ejecuciones: Tiempo: "+mediaTiempo/soluciones+ " Puntuacion: "+ mediaResultado/soluciones);
                 System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>");
             }
         }
