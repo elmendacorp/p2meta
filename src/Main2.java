@@ -34,8 +34,10 @@ public class Main2 {
 
             for (Integer in : semillaFinal) {
                 Greedy miGreedy = new Greedy(fl, in);
-                miGreedy.generaSolucion();
-                miGreedy.getResultados();
+                for(int i = 0;i<50;++i) {
+                    miGreedy.generaSolucion();
+                    miGreedy.getResultados();
+                }
                 System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>");
             }
         }

@@ -1,12 +1,13 @@
 import com.google.common.collect.Multimap;
 
 import java.util.HashMap;
+import java.util.Set;
 
 
 /**
  * Esta clase almacena una solucion valida o no para el problema
  */
-public class Solucion implements Cloneable {
+public class Solucion {
     private int puntuacion = 0;
     private HashMap<Integer, FrecAsignada> frecuenciasAsignadas;
 

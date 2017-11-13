@@ -5,6 +5,8 @@
  * @Mail fjrl0016@red.ujaen.es
  */
 
+import java.util.Vector;
+
 /**
  * Clase para la prueba de ejecucion sobre un unico conjunto de datos
  */
@@ -16,6 +18,8 @@ public class Main {
     public static final int SEMILLA4 = 45678123;
     public static final int SEMILLA5 = 14227736;
     public static final int SEMILLARETO = 21025923;
+
+    public static Vector<Solucion> soluciones= new Vector<>();
 
     public static void main(String[] args) {
 
@@ -37,13 +41,8 @@ public class Main {
         //fileFinal.imprimeDatos();
         int semillaFinal = SEMILLA1;
 
-        Greedy miGreedy = new Greedy(fileFinal, semillaFinal);
-        for(int i = 0;i<50;++i) {
-            miGreedy.generaSolucion();
-            miGreedy.getResultados();
-        }
-
-
+        AGE miAGE = new AGE(fileFinal,semillaFinal);
+        miAGE.inicializacion();
 
 
     }
