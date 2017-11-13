@@ -3,10 +3,10 @@ public class Hijo{
     private int madre;
     private Solucion solucion;
 
-    public Hijo(int padre,int madre){
+    public Hijo(int padre,int madre, Solucion solucion ){
         this.padre=padre;
         this.madre=madre;
-        solucion= new Solucion();
+        this.solucion= solucion;
     }
     public int getMadre(){return madre;}
 

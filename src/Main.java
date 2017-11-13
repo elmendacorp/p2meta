@@ -43,7 +43,7 @@ public class Main {
 
         AGE miAGE = new AGE(fileFinal,semillaFinal);
         miAGE.inicializacion();
-
+        miAGE.ejecucion(20000);
 
     }
 }

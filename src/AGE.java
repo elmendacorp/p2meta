@@ -55,12 +55,46 @@ public class AGE {
             //cruzamos los padres para generar los nuevos hijos
             Vector<Hijo> descendientes = new Vector<>();
             Solucion padre,madre,hijo;
-            for (int i = 0; i < 18; ++i) {
+            for (int i = 0; i < 1; ++i) {
                 //Seleccionamos a los padres
                 padre = (Solucion) poblacion.toArray()[cruces.get(i).getKey()];
                 madre = (Solucion) poblacion.toArray()[cruces.get(i).getValue()];
                 hijo = new Solucion();
+                cruzamiento(padre,madre,hijo,1);
+                descendientes.add(new Hijo(cruces.get(i).getKey(),cruces.get(i).getValue(),hijo));
 
+            }
+            evaluaciones+=10000;
+        }
+
+    }
+
+    /**
+     * Cruce entre los padre(noche de pasion)
+     * @param padre papa
+     * @param madre mama
+     * @param hijo hijo
+     * @param tipo 1 para dos puntos, otra cosa para blx
+     */
+    private void cruzamiento(Solucion padre,Solucion madre, Solucion hijo, int tipo){
+        if(tipo==1){
+            int inicio,fin;
+            inicio=rd.nextInt(padre.getFrecuenciasAsignadas().size());
+            fin=rd.nextInt(padre.getFrecuenciasAsignadas().size());
+            if(inicio>fin){
+                int tmp=inicio;
+                inicio=fin;
+                fin=tmp;
+            }
+            //sustituimos las posiciones por sus respectivos identificadores de transmisor
+            inicio=(Integer)padre.getFrecuenciasAsignadas().keySet().toArray()[inicio];
+            fin=(Integer)padre.getFrecuenciasAsignadas().keySet().toArray()[fin];
+            for(FrecAsignada f:padre.getFrecuenciasAsignadas().values()){
+                if(f.getId()>=inicio &&f.getId()<=fin){
+                    hijo.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(),madre.getFrecuenciasAsignadas().get(f.getId()));
+                }else{
+                    hijo.getFrecuenciasAsignadas().put(f.getId(),f);
+                }
             }
         }
     }
