@@ -43,7 +43,9 @@ public class Main {
 
         AGE miAGE = new AGE(fileFinal,semillaFinal);
         miAGE.inicializacion();
+        miAGE.puntuacionesPoblacion();
         miAGE.ejecucion(20000);
+        miAGE.puntuacionesPoblacion();
 
     }
 }
