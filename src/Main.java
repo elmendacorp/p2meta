@@ -38,8 +38,10 @@ public class Main {
         int semillaFinal = SEMILLA1;
 
         Greedy miGreedy = new Greedy(fileFinal, semillaFinal);
-        miGreedy.generaSolucion();
-        miGreedy.getResultados();
+        for(int i = 0;i<50;++i) {
+            miGreedy.generaSolucion();
+            miGreedy.getResultados();
+        }
 
 
 
