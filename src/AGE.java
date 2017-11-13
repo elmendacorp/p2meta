@@ -157,8 +157,11 @@ public class AGE {
     }
 
     public void puntuacionesPoblacion(){
+        double media=0;
         for(Solucion s:poblacion){
-            System.out.println(s.getPuntuacion());
+            media+=s.getPuntuacion();
         }
+        System.out.println("Puntuacion Media: "+media/poblacion.size()+" Tiempo de ejecucion: "+time / 1000000 + " ms");
     }
+
 }

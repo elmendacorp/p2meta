@@ -33,11 +33,11 @@ public class Main2 {
             System.out.println("---------------------------------------------");
 
             for (Integer in : semillaFinal) {
-                Greedy miGreedy = new Greedy(fl, in);
-                for(int i = 0;i<50;++i) {
-                    miGreedy.generaSolucion();
-                    miGreedy.getResultados();
-                }
+                AGE miAGE = new AGE(fl,in);
+                miAGE.inicializacion();
+                miAGE.puntuacionesPoblacion();
+                miAGE.ejecucion(20000);
+                miAGE.puntuacionesPoblacion();
                 System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>");
             }
         }
