@@ -109,9 +109,22 @@ public class AGE {
                 }
             }
 
+
+            double media = 0;
+            for (int i = 0; i < poblacion.size(); ++i) {
+                media += poblacion.get(i).getValue().getPuntuacion();
+            }
+            System.out.println("Generacion: " + generacion + " Puntuacion Media: " + media / poblacion.size());
+
+            //calculos para la reinicializacion
+            Vector<Integer> puntuaciones = new Vector<>();
+
             double puntuacionNuevaGeneracion = 0;
             for (int i = 0; i < poblacion.size(); ++i) {
                 puntuacionNuevaGeneracion += poblacion.get(i).getValue().getPuntuacion();
+                if (!puntuaciones.contains(poblacion.get(i).getValue().getPuntuacion())) {
+                    puntuaciones.add(poblacion.get(i).getValue().getPuntuacion());
+                }
             }
             puntuacionNuevaGeneracion = puntuacionNuevaGeneracion / poblacion.size();
 
@@ -121,7 +134,7 @@ public class AGE {
                 generacionesSinMejora = 0;
             }
 
-            if (generacionesSinMejora >= 20) {
+            if (generacionesSinMejora >= 20 || (puntuaciones.size() >= poblacion.size() * 0.8)) {
                 generacionesSinMejora = 0;
                 Solucion mejor;
                 int indiceMejor = 0;
@@ -196,8 +209,10 @@ public class AGE {
             for (FrecAsignada f : padre.getFrecuenciasAsignadas().values()) {
                 if (f.getId() >= inicio && f.getId() <= fin) {
                     hijo1.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
-                } else {
                     hijo2.getFrecuenciasAsignadas().put(f.getId(), f);
+                } else {
+                    hijo1.getFrecuenciasAsignadas().put(f.getId(), f);
+                    hijo2.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
                 }
             }
         }
