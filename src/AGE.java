@@ -40,7 +40,7 @@ public class AGE {
         evaluaciones = 50;
     }
 
-    public void ejecucion(int max) {
+    public void ejecucion(int max, int tipo) {
         time = System.nanoTime();
         double puntuacionGeneracionAnterior = 0;
         int generacionesSinMejora = 0;
@@ -76,7 +76,7 @@ public class AGE {
             //cruce de los padres
             hijo1 = new Solucion();
             hijo2 = new Solucion();
-            cruzamiento(padre, madre, hijo1, hijo2, 2);
+            cruzamiento(padre, madre, hijo1, hijo2, tipo);
 
             evaluaciones += 2;
 
@@ -158,7 +158,7 @@ public class AGE {
             }
             puntuacionNuevaGeneracion = puntuacionNuevaGeneracion / poblacion.size();
 
-            System.out.println("Puntuacion Mejor: " + mayor + " Generacion: " + generacion+" Media: "+puntuacionNuevaGeneracion);
+            //System.out.println("Puntuacion Mejor: " + mayor + " Generacion: " + generacion+" Media: "+puntuacionNuevaGeneracion);
 
             if (puntuacionGeneracionAnterior >= puntuacionNuevaGeneracion) {
                 ++generacionesSinMejora;
@@ -172,7 +172,7 @@ public class AGE {
 
             if (generacionesSinMejora >= 20 || (puntuaciones.size() <= poblacion.size() * 0.2)) {
                 generacionesSinMejora = 0;
-                System.out.println("Reinicializa");
+                //System.out.println("Reinicializa");
                 for (int i = 0; i < poblacion.size(); ++i) {
                     if (poblacion.get(i).getKey() < puntuacionMejor) {
                         indiceMejor = i;
@@ -253,7 +253,7 @@ public class AGE {
                         nuevaFrecuencia=data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
                     }
                 }
-                System.out.println("Padre: "+frecPadre+" Madre: "+frecMadre+" Nueva: "+nuevaFrecuencia);
+                //System.out.println("Padre: "+frecPadre+" Madre: "+frecMadre+" Nueva: "+nuevaFrecuencia);
                 hijo1.anadeFrecuencia(new FrecAsignada(frec.getId(),nuevaFrecuencia));
 
                 if(frecPadre<frecMadre){

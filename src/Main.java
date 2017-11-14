@@ -37,14 +37,14 @@ public class Main {
 
 
 
-        Filemanager fileFinal = filemanager1;
+        Filemanager fileFinal = filemanager9;
         //fileFinal.imprimeDatos();
         int semillaFinal = SEMILLA1;
 
         AGE miAGE = new AGE(fileFinal,semillaFinal);
         miAGE.inicializacion();
         miAGE.puntuacionesPoblacion();
-        miAGE.ejecucion(20000);
+        miAGE.ejecucion(20000,2);
         miAGE.puntuacionesPoblacion();
 
     }

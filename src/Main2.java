@@ -36,7 +36,7 @@ public class Main2 {
                 AGE miAGE = new AGE(fl,in);
                 miAGE.inicializacion();
                 miAGE.puntuacionesPoblacion();
-                miAGE.ejecucion(20000);
+                miAGE.ejecucion(20000, 1);
                 miAGE.puntuacionesPoblacion();
                 System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>");
             }
