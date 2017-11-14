@@ -4,12 +4,13 @@ import java.util.*;
 
 
 public class AGE {
-    private Set<Solucion> poblacion;
+    private Vector<Pair<Integer,Solucion>> poblacion;
     private float time;
     private Random rd;
     private Filemanager data;
     private int semilla;
     private int evaluaciones;
+    private Greedy miGreedy;
 
 
     /**
@@ -19,7 +20,7 @@ public class AGE {
      * @param semilla semilla para el aleatorio
      */
     public AGE(Filemanager datos, int semilla) {
-        poblacion = new HashSet<>();
+        poblacion = new Vector<>();
         this.semilla = semilla;
         data = datos;
         rd = new Random();
@@ -31,18 +32,27 @@ public class AGE {
      * Metodo para la inicializacion de la poblacion
      */
     public void inicializacion() {
-        Greedy miGreedy = new Greedy(data, semilla);
+        miGreedy = new Greedy(data, semilla);
         for (int i = 0; i < 50; ++i) {
             miGreedy.generaSolucion();
-            poblacion.add(miGreedy.getSolucion());
+            poblacion.add(new Pair<>(miGreedy.getSolucion().getPuntuacion(),miGreedy.getSolucion()));
         }
         evaluaciones = 50;
     }
 
     public void ejecucion(int max) {
         time = System.nanoTime();
+        double puntuacionGeneracionAnterior=0;
+        int generacionesSinMejora=0;
         int generacion=0;
         while (evaluaciones < max) {
+
+
+            for(int i=0;i<poblacion.size();++i){
+               puntuacionGeneracionAnterior+= poblacion.get(i).getValue().getPuntuacion();
+            }
+            puntuacionGeneracionAnterior=puntuacionGeneracionAnterior/poblacion.size();
+
             Vector<Pair<Integer, Integer>> cruces = new Vector<>();
             //seleccionamos 18 parejas que van a cruzarse
             for (int i = 0; i < 25; ++i) {
@@ -56,16 +66,20 @@ public class AGE {
             }
             //cruzamos los padres para generar los nuevos hijos
             Vector<Hijo> descendientes = new Vector<>();
-            Solucion padre, madre, hijo;
+            Solucion padre, madre, hijo1,hijo2;
             //cruce de los padres
-            for (int i = 0; i < 18; ++i) {
-                padre = (Solucion) poblacion.toArray()[cruces.get(i).getKey()];
-                madre = (Solucion) poblacion.toArray()[cruces.get(i).getValue()];
-                hijo = new Solucion();
-                cruzamiento(padre, madre, hijo, 1);
-                descendientes.add(new Hijo(cruces.get(i).getKey(), cruces.get(i).getValue(), hijo));
+            for (int i = 0; i < 25; ++i) {
+                padre = poblacion.get(cruces.get(i).getKey()).getValue();
+                madre = poblacion.get(cruces.get(i).getKey()).getValue();
+                hijo1 = new Solucion();
+                hijo2= new Solucion();
+                cruzamiento(padre, madre, hijo1, hijo2, 1);
+                descendientes.add(new Hijo(cruces.get(i).getKey(), cruces.get(i).getValue(), hijo1));
+                descendientes.add(new Hijo(cruces.get(i).getKey(), cruces.get(i).getValue(), hijo2));
             }
-            evaluaciones+=25;
+
+
+            evaluaciones+=50;
             int mutados=0;
             //mutacion de los hijos
             for(Hijo h:descendientes){
@@ -86,18 +100,53 @@ public class AGE {
             }
 
             for(Hijo h:descendientes){
-                padre = (Solucion) poblacion.toArray()[h.getPadre()];
-                madre = (Solucion) poblacion.toArray()[h.getMadre()];
-                if(h.getSolucion().getPuntuacion()<padre.getPuntuacion()){
-                    poblacion.remove(padre);
-                    poblacion.add(new Solucion(h.getSolucion()));
-                }
-                if(h.getSolucion().getPuntuacion()<madre.getPuntuacion()){
-                    poblacion.remove(madre);
-                    poblacion.add(new Solucion(h.getSolucion()));
+                for(int i=0;i<poblacion.size();++i){
+                    if(poblacion.get(i).getValue().getPuntuacion()>h.getSolucion().getPuntuacion()){
+                        poblacion.remove(i);
+                        poblacion.add(new Pair<>(h.getSolucion().getPuntuacion(),new Solucion(h.getSolucion())));
+                        break;
+                    }
                 }
             }
 
+            double puntuacionNuevaGeneracion=0;
+            for(int i=0;i<poblacion.size();++i){
+                puntuacionNuevaGeneracion+= poblacion.get(i).getValue().getPuntuacion();
+            }
+            puntuacionNuevaGeneracion=puntuacionNuevaGeneracion/poblacion.size();
+
+            if(puntuacionGeneracionAnterior>=puntuacionNuevaGeneracion){
+                ++generacionesSinMejora;
+            }else{
+                generacionesSinMejora=0;
+            }
+
+            if(generacionesSinMejora>=20){
+                generacionesSinMejora=0;
+                Solucion mejor;
+                int indiceMejor=0;
+                int puntuacionMejor=999999999;
+                for(int i=0;i<poblacion.size();++i){
+                    if(poblacion.get(i).getKey()<puntuacionMejor){
+                        indiceMejor=i;
+                        puntuacionMejor=poblacion.get(i).getKey();
+                    }
+                }
+                mejor= new Solucion(poblacion.get(indiceMejor).getValue());
+                poblacion= new Vector<>();
+                poblacion.add(new Pair<>(mejor.getPuntuacion(),mejor));
+                for (int i = 0; i < 49; ++i) {
+                    miGreedy.generaSolucion();
+                    poblacion.add(new Pair<>(miGreedy.getSolucion().getPuntuacion(),miGreedy.getSolucion()));
+                }
+                evaluaciones += 50;
+            }
+
+            double media=0;
+            for(int i=0;i<poblacion.size();++i){
+                media+= poblacion.get(i).getValue().getPuntuacion();
+            }
+            System.out.println("Puntuacion Media: "+media/poblacion.size()+" Tiempo de ejecucion: "+time / 1000000 + " ms");
             ++generacion;
             //System.out.println("Generacion "+generacion+" Mutaciones "+mutados);
 
@@ -111,10 +160,11 @@ public class AGE {
      *
      * @param padre papa
      * @param madre mama
-     * @param hijo  hijo
+     * @param hijo1  hijo
+     * @param hijo2 hijo
      * @param tipo  1 para dos puntos, otra cosa para blx
      */
-    private void cruzamiento(Solucion padre, Solucion madre, Solucion hijo, int tipo) {
+    private void cruzamiento(Solucion padre, Solucion madre, Solucion hijo1,Solucion hijo2, int tipo) {
         if (tipo == 1) {
             int inicio, fin;
             inicio = rd.nextInt(padre.getFrecuenciasAsignadas().size());
@@ -129,9 +179,11 @@ public class AGE {
             fin = (Integer) padre.getFrecuenciasAsignadas().keySet().toArray()[fin];
             for (FrecAsignada f : padre.getFrecuenciasAsignadas().values()) {
                 if (f.getId() >= inicio && f.getId() <= fin) {
-                    hijo.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
+                    hijo1.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
+                    hijo2.getFrecuenciasAsignadas().put(f.getId(), f);
                 } else {
-                    hijo.getFrecuenciasAsignadas().put(f.getId(), f);
+                    hijo1.getFrecuenciasAsignadas().put(f.getId(), f);
+                    hijo2.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
                 }
             }
         } else {
@@ -148,9 +200,9 @@ public class AGE {
             fin = (Integer) padre.getFrecuenciasAsignadas().keySet().toArray()[fin];
             for (FrecAsignada f : padre.getFrecuenciasAsignadas().values()) {
                 if (f.getId() >= inicio && f.getId() <= fin) {
-                    hijo.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
+                    hijo1.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
                 } else {
-                    hijo.getFrecuenciasAsignadas().put(f.getId(), f);
+                    hijo2.getFrecuenciasAsignadas().put(f.getId(), f);
                 }
             }
         }
@@ -158,8 +210,8 @@ public class AGE {
 
     public void puntuacionesPoblacion(){
         double media=0;
-        for(Solucion s:poblacion){
-            media+=s.getPuntuacion();
+        for(int i=0;i<poblacion.size();++i){
+            media+= poblacion.get(i).getValue().getPuntuacion();
         }
         System.out.println("Puntuacion Media: "+media/poblacion.size()+" Tiempo de ejecucion: "+time / 1000000 + " ms");
     }
