@@ -53,8 +53,14 @@ public class AGE {
             }
             puntuacionGeneracionAnterior = puntuacionGeneracionAnterior / poblacion.size();
 
+            //torneo binario
+            Vector<Pair<Integer,Solucion>> torneo=new Vector<>();
+
+            //seleccion de los peores padres
+
             Vector<Pair<Integer, Integer>> cruces = new Vector<>();
-            //seleccionamos 18 parejas que van a cruzarse
+            //seleccionamos 25 parejas que van a cruzarse
+
             for (int i = 0; i < 25; ++i) {
                 int padre = rd.nextInt(50);
                 int madre = rd.nextInt(50);
@@ -64,9 +70,12 @@ public class AGE {
                 }
                 cruces.add(new Pair<>(padre, madre));
             }
+
+
             //cruzamos los padres para generar los nuevos hijos
             Vector<Hijo> descendientes = new Vector<>();
             Solucion padre, madre, hijo1, hijo2;
+
             //cruce de los padres
             for (int i = 0; i < 25; ++i) {
                 padre = poblacion.get(cruces.get(i).getKey()).getValue();
@@ -79,7 +88,7 @@ public class AGE {
             }
 
 
-            evaluaciones += 50;
+            evaluaciones += 25;
             int mutados = 0;
             //mutacion de los hijos
             for (Hijo h : descendientes) {
@@ -110,11 +119,13 @@ public class AGE {
             }
 
 
-            double media = 0;
+            int mayor = 999999999;
             for (int i = 0; i < poblacion.size(); ++i) {
-                media += poblacion.get(i).getValue().getPuntuacion();
+                if (poblacion.get(i).getKey() < mayor) {
+                    mayor = poblacion.get(i).getKey();
+                }
             }
-            System.out.println("Generacion: " + generacion + " Puntuacion Media: " + media / poblacion.size());
+            System.out.println("Puntuacion Mejor: " + mayor+ " Generacion: "+generacion);
 
             //calculos para la reinicializacion
             Vector<Integer> puntuaciones = new Vector<>();
@@ -134,11 +145,13 @@ public class AGE {
                 generacionesSinMejora = 0;
             }
 
-            if (generacionesSinMejora >= 20 || (puntuaciones.size() >= poblacion.size() * 0.8)) {
+            Solucion mejor;
+            int indiceMejor = 0;
+            int puntuacionMejor = 999999999;
+
+            if (generacionesSinMejora >= 20 || (puntuaciones.size() <= poblacion.size() * 0.2)) {
                 generacionesSinMejora = 0;
-                Solucion mejor;
-                int indiceMejor = 0;
-                int puntuacionMejor = 999999999;
+                System.out.println("Reinicializa");
                 for (int i = 0; i < poblacion.size(); ++i) {
                     if (poblacion.get(i).getKey() < puntuacionMejor) {
                         indiceMejor = i;
@@ -219,11 +232,13 @@ public class AGE {
     }
 
     public void puntuacionesPoblacion() {
-        double media = 0;
+        int mejor = 999999999;
         for (int i = 0; i < poblacion.size(); ++i) {
-            media += poblacion.get(i).getValue().getPuntuacion();
+            if(poblacion.get(i).getKey()<mejor){
+                mejor=poblacion.get(i).getKey();
+            }
         }
-        System.out.println("Puntuacion Media: " + media / poblacion.size() + " Tiempo de ejecucion: " + time / 1000000 + " ms");
+        System.out.println("Puntuacion Mejor: " + mejor + " Tiempo de ejecucion: " + time / 1000000 + " ms");
     }
 
 }
