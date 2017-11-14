@@ -1,4 +1,3 @@
-import javafx.collections.transformation.SortedList;
 import javafx.util.Pair;
 
 import java.util.*;
@@ -300,7 +299,7 @@ public class AGE {
                 mejor = poblacion.get(i).getKey();
             }
         }
-        System.out.println("Puntuacion Mejor: " + mejor + " Tiempo de ejecucion: " + time / 1000000 + " ms");
+        System.out.println("AGE Puntuacion Mejor: " + mejor + " Tiempo de ejecucion: " + time / 1000000 + " ms");
     }
 
 }
