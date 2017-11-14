@@ -37,9 +37,10 @@ public class Main {
 
 
 
-        Filemanager fileFinal = filemanager9;
+        Filemanager fileFinal = filemanager2;
         //fileFinal.imprimeDatos();
         int semillaFinal = SEMILLA1;
+
 
         AGE miAGE = new AGE(fileFinal,semillaFinal);
         miAGE.inicializacion();

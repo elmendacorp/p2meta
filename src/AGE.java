@@ -1,3 +1,4 @@
+import javafx.collections.transformation.SortedList;
 import javafx.util.Pair;
 
 import java.util.*;
@@ -37,6 +38,13 @@ public class AGE {
             miGreedy.generaSolucion();
             poblacion.add(new Pair<>(miGreedy.getSolucion().getPuntuacion(), miGreedy.getSolucion()));
         }
+        /*
+        for(Pair<Integer,Solucion> p:poblacion){
+            for(FrecAsignada f: p.getValue().getFrecuenciasAsignadas().values()){
+                System.out.println("["+f.getId()+" "+f.getFrecuencia()+"]");
+            }
+        }
+        */
         evaluaciones = 50;
     }
 
@@ -229,12 +237,15 @@ public class AGE {
                 }
             }
         } else {
+
             for(FrecAsignada frec:padre.getFrecuenciasAsignadas().values()){
+
                 int rangoNodo = data.getTransmisores().get(frec.getId()).getRango();
                 int intervalo;
                 int nuevaFrecuencia;
                 int frecPadre=frec.getFrecuencia();
                 int frecMadre=madre.getFrecuenciasAsignadas().get(frec.getId()).getFrecuencia();
+                //System.out.println("Padre: "+frecPadre+" Madre: "+frecMadre+" Nueva: "+frec.getId());
                 if(frecPadre<frecMadre){
                     intervalo= (int)((frecMadre-frecPadre)*0.5);
                     nuevaFrecuencia=rd.nextInt(frecMadre+intervalo);
@@ -253,7 +264,8 @@ public class AGE {
                         nuevaFrecuencia=data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
                     }
                 }
-                //System.out.println("Padre: "+frecPadre+" Madre: "+frecMadre+" Nueva: "+nuevaFrecuencia);
+
+
                 hijo1.anadeFrecuencia(new FrecAsignada(frec.getId(),nuevaFrecuencia));
 
                 if(frecPadre<frecMadre){

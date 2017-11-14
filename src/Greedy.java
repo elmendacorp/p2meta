@@ -37,7 +37,7 @@ public class Greedy {
                 break;
             }
         }
-
+        //comienzo por el siguiente a mi nodo
         while(miIterador.hasNext()) {
             Transmisor t= miIterador.next();
             HashMap<Integer, CosteFrecuencia> frecuenciasProcesadas = new HashMap<>();
@@ -60,7 +60,7 @@ public class Greedy {
                     }
                 } else {
                     int coste = 100;
-                    int elegido = 0;
+                    int elegido = nuevaFrecuencia;
                     for (CosteFrecuencia crt : frecuenciasProcesadas.values()) {
                         if (crt.getCoste() < coste) {
                             coste = crt.getCoste();
@@ -97,7 +97,7 @@ public class Greedy {
                     }
                 } else {
                     int coste = 100;
-                    int elegido = 0;
+                    int elegido = nuevaFrecuencia;
                     for (CosteFrecuencia crt : frecuenciasProcesadas.values()) {
                         if (crt.getCoste() < coste) {
                             coste = crt.getCoste();
@@ -116,17 +116,17 @@ public class Greedy {
     }
 
     public int calculaPuntosFrec(int posicion, int frecuencia) {
-        int puntosOriginal = 0;
+        int puntos = 0;
         for (Restriccion rs : data.getRestricciones().get(posicion)) {
             if (solucionLocal.getFrecuenciasAsignadas().containsKey(rs.getId_restriccion())) {
                 int frecuenciaRestringida = solucionLocal.getFrecuenciasAsignadas().get(rs.getId_restriccion()).getFrecuencia();
                 if (Math.abs(frecuencia - frecuenciaRestringida) <= rs.getTolerancia()) {
-                    puntosOriginal += rs.getPenalizacion();
+                    puntos+= rs.getPenalizacion();
                 }
             }
 
         }
-        return puntosOriginal;
+        return puntos;
     }
 
 
