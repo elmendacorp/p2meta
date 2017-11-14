@@ -4,7 +4,7 @@ import java.util.*;
 
 
 public class AGE {
-    private Vector<Pair<Integer,Solucion>> poblacion;
+    private Vector<Pair<Integer, Solucion>> poblacion;
     private float time;
     private Random rd;
     private Filemanager data;
@@ -35,23 +35,23 @@ public class AGE {
         miGreedy = new Greedy(data, semilla);
         for (int i = 0; i < 50; ++i) {
             miGreedy.generaSolucion();
-            poblacion.add(new Pair<>(miGreedy.getSolucion().getPuntuacion(),miGreedy.getSolucion()));
+            poblacion.add(new Pair<>(miGreedy.getSolucion().getPuntuacion(), miGreedy.getSolucion()));
         }
         evaluaciones = 50;
     }
 
     public void ejecucion(int max) {
         time = System.nanoTime();
-        double puntuacionGeneracionAnterior=0;
-        int generacionesSinMejora=0;
-        int generacion=0;
+        double puntuacionGeneracionAnterior = 0;
+        int generacionesSinMejora = 0;
+        int generacion = 0;
         while (evaluaciones < max) {
 
 
-            for(int i=0;i<poblacion.size();++i){
-               puntuacionGeneracionAnterior+= poblacion.get(i).getValue().getPuntuacion();
+            for (int i = 0; i < poblacion.size(); ++i) {
+                puntuacionGeneracionAnterior += poblacion.get(i).getValue().getPuntuacion();
             }
-            puntuacionGeneracionAnterior=puntuacionGeneracionAnterior/poblacion.size();
+            puntuacionGeneracionAnterior = puntuacionGeneracionAnterior / poblacion.size();
 
             Vector<Pair<Integer, Integer>> cruces = new Vector<>();
             //seleccionamos 18 parejas que van a cruzarse
@@ -66,28 +66,28 @@ public class AGE {
             }
             //cruzamos los padres para generar los nuevos hijos
             Vector<Hijo> descendientes = new Vector<>();
-            Solucion padre, madre, hijo1,hijo2;
+            Solucion padre, madre, hijo1, hijo2;
             //cruce de los padres
             for (int i = 0; i < 25; ++i) {
                 padre = poblacion.get(cruces.get(i).getKey()).getValue();
                 madre = poblacion.get(cruces.get(i).getKey()).getValue();
                 hijo1 = new Solucion();
-                hijo2= new Solucion();
+                hijo2 = new Solucion();
                 cruzamiento(padre, madre, hijo1, hijo2, 1);
                 descendientes.add(new Hijo(cruces.get(i).getKey(), cruces.get(i).getValue(), hijo1));
                 descendientes.add(new Hijo(cruces.get(i).getKey(), cruces.get(i).getValue(), hijo2));
             }
 
 
-            evaluaciones+=50;
-            int mutados=0;
+            evaluaciones += 50;
+            int mutados = 0;
             //mutacion de los hijos
-            for(Hijo h:descendientes){
+            for (Hijo h : descendientes) {
                 //probabilidad de mutacion del cromosoma
-                if(rd.nextDouble()<0.02){
-                    for(FrecAsignada f:h.getSolucion().getFrecuenciasAsignadas().values()){
+                if (rd.nextDouble() < 0.02) {
+                    for (FrecAsignada f : h.getSolucion().getFrecuenciasAsignadas().values()) {
                         //probabilidad de mutacion del gen
-                        if(rd.nextDouble()<0.1){
+                        if (rd.nextDouble() < 0.1) {
                             int rangoNodo = data.getTransmisores().get(f.getId()).getRango();
                             int rangoTam = data.getFrecuencias().get(rangoNodo).getFrecuencias().size();
                             int frecNodo = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(rd.nextInt(rangoTam));
@@ -99,54 +99,49 @@ public class AGE {
                 h.getSolucion().calculaRestriccion(data.getRestricciones());
             }
 
-            for(Hijo h:descendientes){
-                for(int i=0;i<poblacion.size();++i){
-                    if(poblacion.get(i).getValue().getPuntuacion()>h.getSolucion().getPuntuacion()){
+            for (Hijo h : descendientes) {
+                for (int i = 0; i < poblacion.size(); ++i) {
+                    if (poblacion.get(i).getValue().getPuntuacion() > h.getSolucion().getPuntuacion()) {
                         poblacion.remove(i);
-                        poblacion.add(new Pair<>(h.getSolucion().getPuntuacion(),new Solucion(h.getSolucion())));
+                        poblacion.add(new Pair<>(h.getSolucion().getPuntuacion(), new Solucion(h.getSolucion())));
                         break;
                     }
                 }
             }
 
-            double puntuacionNuevaGeneracion=0;
-            for(int i=0;i<poblacion.size();++i){
-                puntuacionNuevaGeneracion+= poblacion.get(i).getValue().getPuntuacion();
+            double puntuacionNuevaGeneracion = 0;
+            for (int i = 0; i < poblacion.size(); ++i) {
+                puntuacionNuevaGeneracion += poblacion.get(i).getValue().getPuntuacion();
             }
-            puntuacionNuevaGeneracion=puntuacionNuevaGeneracion/poblacion.size();
+            puntuacionNuevaGeneracion = puntuacionNuevaGeneracion / poblacion.size();
 
-            if(puntuacionGeneracionAnterior>=puntuacionNuevaGeneracion){
+            if (puntuacionGeneracionAnterior >= puntuacionNuevaGeneracion) {
                 ++generacionesSinMejora;
-            }else{
-                generacionesSinMejora=0;
+            } else {
+                generacionesSinMejora = 0;
             }
 
-            if(generacionesSinMejora>=20){
-                generacionesSinMejora=0;
+            if (generacionesSinMejora >= 20) {
+                generacionesSinMejora = 0;
                 Solucion mejor;
-                int indiceMejor=0;
-                int puntuacionMejor=999999999;
-                for(int i=0;i<poblacion.size();++i){
-                    if(poblacion.get(i).getKey()<puntuacionMejor){
-                        indiceMejor=i;
-                        puntuacionMejor=poblacion.get(i).getKey();
+                int indiceMejor = 0;
+                int puntuacionMejor = 999999999;
+                for (int i = 0; i < poblacion.size(); ++i) {
+                    if (poblacion.get(i).getKey() < puntuacionMejor) {
+                        indiceMejor = i;
+                        puntuacionMejor = poblacion.get(i).getKey();
                     }
                 }
-                mejor= new Solucion(poblacion.get(indiceMejor).getValue());
-                poblacion= new Vector<>();
-                poblacion.add(new Pair<>(mejor.getPuntuacion(),mejor));
+                mejor = new Solucion(poblacion.get(indiceMejor).getValue());
+                poblacion = new Vector<>();
+                poblacion.add(new Pair<>(mejor.getPuntuacion(), mejor));
                 for (int i = 0; i < 49; ++i) {
                     miGreedy.generaSolucion();
-                    poblacion.add(new Pair<>(miGreedy.getSolucion().getPuntuacion(),miGreedy.getSolucion()));
+                    poblacion.add(new Pair<>(miGreedy.getSolucion().getPuntuacion(), miGreedy.getSolucion()));
                 }
                 evaluaciones += 50;
             }
 
-            double media=0;
-            for(int i=0;i<poblacion.size();++i){
-                media+= poblacion.get(i).getValue().getPuntuacion();
-            }
-            System.out.println("Puntuacion Media: "+media/poblacion.size()+" Tiempo de ejecucion: "+time / 1000000 + " ms");
             ++generacion;
             //System.out.println("Generacion "+generacion+" Mutaciones "+mutados);
 
@@ -160,11 +155,11 @@ public class AGE {
      *
      * @param padre papa
      * @param madre mama
-     * @param hijo1  hijo
+     * @param hijo1 hijo
      * @param hijo2 hijo
      * @param tipo  1 para dos puntos, otra cosa para blx
      */
-    private void cruzamiento(Solucion padre, Solucion madre, Solucion hijo1,Solucion hijo2, int tipo) {
+    private void cruzamiento(Solucion padre, Solucion madre, Solucion hijo1, Solucion hijo2, int tipo) {
         if (tipo == 1) {
             int inicio, fin;
             inicio = rd.nextInt(padre.getFrecuenciasAsignadas().size());
@@ -208,12 +203,12 @@ public class AGE {
         }
     }
 
-    public void puntuacionesPoblacion(){
-        double media=0;
-        for(int i=0;i<poblacion.size();++i){
-            media+= poblacion.get(i).getValue().getPuntuacion();
+    public void puntuacionesPoblacion() {
+        double media = 0;
+        for (int i = 0; i < poblacion.size(); ++i) {
+            media += poblacion.get(i).getValue().getPuntuacion();
         }
-        System.out.println("Puntuacion Media: "+media/poblacion.size()+" Tiempo de ejecucion: "+time / 1000000 + " ms");
+        System.out.println("Puntuacion Media: " + media / poblacion.size() + " Tiempo de ejecucion: " + time / 1000000 + " ms");
     }
 
 }
