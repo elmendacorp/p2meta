@@ -30,12 +30,13 @@ public class AGG {
      * Metodo para la inicializacion de la poblacion
      */
     private void inicializacion() {
+        poblacion.clear();
         Greedy miGreedy = new Greedy(data, semilla);
         for (int i = 0; i < 50; ++i) {
             miGreedy.generaSolucion();
             poblacion.put(i, miGreedy.getSolucion());
         }
-        //evaluaciones += 50;
+        evaluaciones += 50;
     }
 
     /**
@@ -49,7 +50,7 @@ public class AGG {
         while (evaluaciones < max) {
 
             //Elitismo: si la mejor solución de la generación anterior no sobrevive, sustituye directamente la peor solución de la nueva población
-            if (mejor.getPuntuacion() != 99999999 && !poblacion.containsValue(mejor)) {
+            if (!poblacion.containsValue(mejor)) {
                 int posicionPeor = 0;
                 for (int i = 0; i < poblacion.values().size(); ++i) {
                     if (poblacion.get(i).getPuntuacion() > poblacion.get(posicionPeor).getPuntuacion()) {
@@ -66,12 +67,6 @@ public class AGG {
             //Cruce normal
             for (int i = 0; i < 18; i += 2) {
 
-                Solucion hijo1 = new Solucion();
-                hijo1.getFrecuenciasAsignadas().putAll(poblacionGanadores.get(i).getFrecuenciasAsignadas());
-
-                Solucion hijo2 = new Solucion();
-                hijo2.getFrecuenciasAsignadas().putAll(poblacionGanadores.get(i + 1).getFrecuenciasAsignadas());
-
                 int desde = rd.nextInt(poblacionGanadores.get(0).getFrecuenciasAsignadas().size());
                 int hasta = rd.nextInt(poblacionGanadores.get(0).getFrecuenciasAsignadas().size());
                 if (desde > hasta) {
@@ -80,22 +75,26 @@ public class AGG {
                     desde = aux;
                 }
 
-                for (FrecAsignada fr : hijo1.getFrecuenciasAsignadas().values()) {
-                    if (fr.getId() >= desde && fr.getId() <= hasta) {
-                        hijo2.getFrecuenciasAsignadas().put(fr.getId(), new FrecAsignada(fr.getId(), fr.getFrecuencia()));
-                    }
-                    if (fr.getId() == hasta) break;
+                int posPadre = rd.nextInt(poblacionGanadores.size());
+                int posMadre = rd.nextInt(poblacionGanadores.size());
+                while (posMadre == posPadre) {
+                    posMadre = rd.nextInt(poblacionGanadores.size());
                 }
-                hijo1.calculaRestriccion(data.getRestricciones());
 
-                for (FrecAsignada fr : hijo2.getFrecuenciasAsignadas().values()) {
-                    if (fr.getId() >= desde && fr.getId() <= hasta) {
-                        hijo1.getFrecuenciasAsignadas().put(fr.getId(), new FrecAsignada(fr.getId(), fr.getFrecuencia()));
+                Solucion padre = poblacionGanadores.get(posPadre);
+                Solucion madre = poblacionGanadores.get(posMadre);
+                Solucion hijo1 = new Solucion();
+                Solucion hijo2 = new Solucion();
+
+                for (FrecAsignada f : padre.getFrecuenciasAsignadas().values()) {
+                    if (f.getId() >= desde && f.getId() <= hasta) {
+                        hijo1.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
+                        hijo2.getFrecuenciasAsignadas().put(f.getId(), f);
+                    } else {
+                        hijo1.getFrecuenciasAsignadas().put(f.getId(), f);
+                        hijo2.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
                     }
-                    if (fr.getId() == hasta) break;
                 }
-                hijo2.calculaRestriccion(data.getRestricciones());
-
                 evaluaciones += 2;
             }
 
@@ -130,7 +129,7 @@ public class AGG {
             }
             ++generacion;
 
-            System.out.println("Generacion: " + generacion + " .Mejor solucion: " + mejor.getPuntuacion() + ". Evaluaciones " + evaluaciones);
+            //System.out.println("Generacion: " + generacion + " .Mejor solucion: " + mejor.getPuntuacion() + ". Evaluaciones " + evaluaciones);
 
         }
         time = System.nanoTime() - time;
