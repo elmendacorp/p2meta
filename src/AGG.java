@@ -1,11 +1,12 @@
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Vector;
 
 public class AGG {
     private HashMap<Integer, Solucion> poblacion;
     private HashMap<Integer, Solucion> poblacionGanadores;
     private Solucion mejor;
-    private int tamPoblacion;
+    private Greedy miGreedy;
     private float time;
     private Random rd;
     private Filemanager data;
@@ -15,7 +16,6 @@ public class AGG {
     public AGG(Filemanager datos, int semilla) {
         poblacion = new HashMap<>();
         poblacionGanadores = new HashMap<>();
-        tamPoblacion = 50;
         mejor = new Solucion();
         mejor.setPuntuacion(99999999);
         this.semilla = semilla;
@@ -24,14 +24,14 @@ public class AGG {
         rd.setSeed(semilla);
         evaluaciones = 0;
         inicializacion();
+        calculaMejorsolucion(poblacion.values().toArray());
     }
 
     /**
      * Metodo para la inicializacion de la poblacion
      */
     private void inicializacion() {
-        poblacion.clear();
-        Greedy miGreedy = new Greedy(data, semilla);
+        miGreedy = new Greedy(data, semilla);
         for (int i = 0; i < 50; ++i) {
             miGreedy.generaSolucion();
             poblacion.put(i, miGreedy.getSolucion());
@@ -44,22 +44,17 @@ public class AGG {
      */
     public void ejecucion(int max) {
         time = System.nanoTime();
+        double puntuacionGeneracionAnterior = 0;
         int generacionesSinMejora = 0;
         int generacion = 0;
 
         while (evaluaciones < max) {
-
-            //Elitismo: si la mejor solución de la generación anterior no sobrevive, sustituye directamente la peor solución de la nueva población
-            if (!poblacion.containsValue(mejor)) {
-                int posicionPeor = 0;
-                for (int i = 0; i < poblacion.values().size(); ++i) {
-                    if (poblacion.get(i).getPuntuacion() > poblacion.get(posicionPeor).getPuntuacion()) {
-                        posicionPeor = i;
-                    }
-                }
-                poblacion.remove(posicionPeor);
-                poblacion.put(posicionPeor, mejor);
+            System.out.println("Media : " + puntuacionGeneracionAnterior + " Mejor :" + mejor.getPuntuacion());
+            puntuacionGeneracionAnterior = 0;
+            for (int i = 0; i < poblacion.size(); ++i) {
+                puntuacionGeneracionAnterior += poblacion.get(i).getPuntuacion();
             }
+            puntuacionGeneracionAnterior = puntuacionGeneracionAnterior / poblacion.size();
 
             //Torneo Binario
             torneoBinario();
@@ -67,8 +62,8 @@ public class AGG {
             //Cruce normal
             for (int i = 0; i < 18; ++i) {
 
-                int desde = rd.nextInt(poblacionGanadores.get(i).getFrecuenciasAsignadas().size());
-                int hasta = rd.nextInt(poblacionGanadores.get(i).getFrecuenciasAsignadas().size());
+                int desde = rd.nextInt(poblacionGanadores.get(0).getFrecuenciasAsignadas().size());
+                int hasta = rd.nextInt(poblacionGanadores.get(0).getFrecuenciasAsignadas().size());
                 if (desde > hasta) {
                     int aux = hasta;
                     hasta = desde;
@@ -95,35 +90,76 @@ public class AGG {
                         hijo2.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
                     }
                 }
+
+                poblacionGanadores.remove(posPadre);
+                poblacionGanadores.put(posPadre, hijo1);
+                poblacionGanadores.get(posPadre).calculaRestriccion(data.getRestricciones());
+
+                poblacionGanadores.remove(posMadre);
+                poblacionGanadores.put(posMadre, hijo2);
+                poblacionGanadores.get(posMadre).calculaRestriccion(data.getRestricciones());
+
                 evaluaciones += 2;
             }
 
             //Mutacion
-            int posMutacion = rd.nextInt(tamPoblacion);
+            int posMutacion = rd.nextInt(poblacionGanadores.values().size());
             mutacion(poblacionGanadores.get(posMutacion));
+            poblacionGanadores.get(posMutacion).calculaRestriccion(data.getRestricciones());
 
-            //Buscamos la mejor solucion tras la mutacion
+            //Buscamos la mejor solucion, por si hay una nueva
             Solucion posibleMejor = calculaMejorsolucion(poblacionGanadores.values().toArray());
-
-            //Si no hemos mejorado
             if (posibleMejor.getPuntuacion() < mejor.getPuntuacion()) {
                 mejor = posibleMejor;
-            } else {
-                ++generacionesSinMejora;
             }
 
-            if (generacionesSinMejora == 20) {
-                inicializacion();
-                generacionesSinMejora = 0;
+            Vector<Integer> puntuaciones = new Vector<>();
+            //calculo del numero de individuos diferentes dentro de la poblacion
+            double puntuacionNuevaGeneracion = 0;
+            for (int i = 0; i < poblacionGanadores.size(); ++i) {
+                puntuacionNuevaGeneracion += poblacionGanadores.get(i).getPuntuacion();
+                if (!puntuaciones.contains(poblacionGanadores.get(i).getPuntuacion())) {
+                    puntuaciones.add(poblacionGanadores.get(i).getPuntuacion());
+                }
+            }
+            puntuacionNuevaGeneracion = puntuacionNuevaGeneracion / poblacionGanadores.size();
+
+            //System.out.println("Media ahora: " + puntuacionNuevaGeneracion);
+            //Miramos si hemos mejorado la media en esta generacion
+            if (puntuacionGeneracionAnterior >= puntuacionNuevaGeneracion) {
+                ++generacionesSinMejora;
             } else {
-                //Reemplazamiento
+                generacionesSinMejora = 0;
+            }
+
+            //Reinicializamos si no mejoramos en 20 generacion o el 80% de los individuos se parecen demasiado
+            if (generacionesSinMejora >= 20 || (puntuaciones.size() <= poblacionGanadores.size() * 0.2)) {
+                generacionesSinMejora = 0;
+                System.out.println("Reinicio");
+                poblacion.clear();
+                for (int i = 0; i < 49; ++i) {
+                    miGreedy.generaSolucion();
+                    poblacion.put(i, miGreedy.getSolucion());
+                }
+                evaluaciones += 50;
+
+                //Elitismo: si la mejor solución de la generación anterior no sobrevive, sustituye directamente la peor solución de la nueva población
+                //volver a mirar cual es la peor
+                int posicionPeor = 0;
+                for (int i = 0; i < poblacionGanadores.values().size(); ++i) {
+                    if (poblacionGanadores.get(i).getPuntuacion() > poblacionGanadores.get(posicionPeor).getPuntuacion()) {
+                        posicionPeor = i;
+                    }
+                }
+                poblacion.remove(posicionPeor);
+                poblacion.put(posicionPeor, mejor);
+
+            } else {
                 poblacion.clear();
                 poblacion.putAll(poblacionGanadores);
             }
+
             ++generacion;
-
-            //System.out.println("Generacion: " + generacion + " .Mejor solucion: " + mejor.getPuntuacion() + ". Evaluaciones " + evaluaciones);
-
         }
         time = System.nanoTime() - time;
     }
@@ -141,14 +177,14 @@ public class AGG {
     }
 
     private Solucion calculaMejorsolucion(Object[] poblaciones) {
-        Solucion mejor = new Solucion();
-        mejor.setPuntuacion(99999999);
+        Solucion masBaja = new Solucion();
+        masBaja.setPuntuacion(999999);
 
         for (Object sol : poblaciones) {
             Solucion s = (Solucion) sol;
-            if (s.getPuntuacion() < mejor.getPuntuacion()) mejor = s;
+            if (s.getPuntuacion() < masBaja.getPuntuacion()) masBaja = s;
         }
-        return mejor;
+        return masBaja;
     }
 
     public void mostrarResultados() {
@@ -162,7 +198,6 @@ public class AGG {
                 int rangoTam = data.getFrecuencias().get(rangoNodo).getFrecuencias().size();
                 int frecNodo = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(rd.nextInt(rangoTam));
                 f.setFrecuencia(frecNodo);
-
             }
         }
     }
