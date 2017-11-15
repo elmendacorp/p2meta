@@ -37,6 +37,7 @@ public class AGE {
             miGreedy.generaSolucion();
             poblacion.add(new Pair<>(miGreedy.getSolucion().getPuntuacion(), miGreedy.getSolucion()));
         }
+        //informacion de depuracion para ver que las soluciones se crean adecuadamente
         /*
         for(Pair<Integer,Solucion> p:poblacion){
             for(FrecAsignada f: p.getValue().getFrecuenciasAsignadas().values()){
@@ -87,64 +88,19 @@ public class AGE {
 
             evaluaciones += 2;
 
-            int mutados = 0;
             //mutacion de los hijos
 
-            //probabilidad de mutacion del cromosoma
-            if (rd.nextDouble() < 0.02) {
-                for (FrecAsignada f : hijo1.getFrecuenciasAsignadas().values()) {
-                    //probabilidad de mutacion del gen
-                    if (rd.nextDouble() < 0.1) {
-                        int rangoNodo = data.getTransmisores().get(f.getId()).getRango();
-                        int rangoTam = data.getFrecuencias().get(rangoNodo).getFrecuencias().size();
-                        int frecNodo = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(rd.nextInt(rangoTam));
-                        f.setFrecuencia(frecNodo);
-                        ++mutados;
-                    }
-                }
-            }
+            mutacionDescendiente(hijo1);
+            mutacionDescendiente(hijo2);
 
-            if (rd.nextDouble() < 0.02) {
-                for (FrecAsignada f : hijo2.getFrecuenciasAsignadas().values()) {
-                    //probabilidad de mutacion del gen
-                    if (rd.nextDouble() < 0.1) {
-                        int rangoNodo = data.getTransmisores().get(f.getId()).getRango();
-                        int rangoTam = data.getFrecuencias().get(rangoNodo).getFrecuencias().size();
-                        int frecNodo = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(rd.nextInt(rangoTam));
-                        f.setFrecuencia(frecNodo);
-                        ++mutados;
-                    }
-                }
-            }
             hijo1.calculaRestriccion(data.getRestricciones());
             hijo2.calculaRestriccion(data.getRestricciones());
 
-            int reemplazo = 0;
-            int idReemplazo=0;
-            for (int i = 0; i < poblacion.size(); ++i) {
-                if (poblacion.get(i).getKey() > reemplazo) {
-                    reemplazo = poblacion.get(i).getKey();
-                    idReemplazo=i;
-                }
-            }
-            if(poblacion.get(idReemplazo).getKey()>hijo1.getPuntuacion()){
-                poblacion.remove(idReemplazo);
-                poblacion.add(new Pair<>(hijo1.getPuntuacion(),hijo1));
-            }
+            //reemplazo dentro de la poblacion
+            reemplazoPoblacion(hijo1);
+            reemplazoPoblacion(hijo2);
 
-            reemplazo = 0;
-            idReemplazo=0;
-            for (int i = 0; i < poblacion.size(); ++i) {
-                if (poblacion.get(i).getKey() > reemplazo) {
-                    reemplazo = poblacion.get(i).getKey();
-                    idReemplazo=i;
-                }
-            }
-            if(poblacion.get(idReemplazo).getKey()>hijo2.getPuntuacion()){
-                poblacion.remove(idReemplazo);
-                poblacion.add(new Pair<>(hijo2.getPuntuacion(),hijo2));
-            }
-
+            //mejor solucion de la poblacion
             int mayor = 999999999;
             for (int i = 0; i < poblacion.size(); ++i) {
                 if (poblacion.get(i).getKey() < mayor) {
@@ -156,6 +112,8 @@ public class AGE {
             //calculos para la reinicializacion
             Vector<Integer> puntuaciones = new Vector<>();
 
+
+            //calculo del numero de individuos diferentes dentro de la poblacion
             double puntuacionNuevaGeneracion = 0;
             for (int i = 0; i < poblacion.size(); ++i) {
                 puntuacionNuevaGeneracion += poblacion.get(i).getValue().getPuntuacion();
@@ -173,13 +131,16 @@ public class AGE {
                 generacionesSinMejora = 0;
             }
 
+
             Solucion mejor;
             int indiceMejor = 0;
             int puntuacionMejor = 999999999;
 
+            //reinicializacion de la poblacion
             if (generacionesSinMejora >= 20 || (puntuaciones.size() <= poblacion.size() * 0.2)) {
                 generacionesSinMejora = 0;
                 //System.out.println("Reinicializa");
+                //seleccion del mejor candidato
                 for (int i = 0; i < poblacion.size(); ++i) {
                     if (poblacion.get(i).getKey() < puntuacionMejor) {
                         indiceMejor = i;
@@ -189,6 +150,7 @@ public class AGE {
                 mejor = new Solucion(poblacion.get(indiceMejor).getValue());
                 poblacion = new Vector<>();
                 poblacion.add(new Pair<>(mejor.getPuntuacion(), mejor));
+                //se completa la poblacion con soluciones greedy
                 for (int i = 0; i < 49; ++i) {
                     miGreedy.generaSolucion();
                     poblacion.add(new Pair<>(miGreedy.getSolucion().getPuntuacion(), miGreedy.getSolucion()));
@@ -197,7 +159,6 @@ public class AGE {
             }
 
             ++generacion;
-            //System.out.println("Generacion "+generacion+" Mutaciones "+mutados);
 
 
         }
@@ -237,58 +198,100 @@ public class AGE {
             }
         } else {
 
-            for(FrecAsignada frec:padre.getFrecuenciasAsignadas().values()){
+            for (FrecAsignada frec : padre.getFrecuenciasAsignadas().values()) {
 
                 int rangoNodo = data.getTransmisores().get(frec.getId()).getRango();
                 int intervalo;
                 int nuevaFrecuencia;
-                int frecPadre=frec.getFrecuencia();
-                int frecMadre=madre.getFrecuenciasAsignadas().get(frec.getId()).getFrecuencia();
+                int frecPadre = frec.getFrecuencia();
+                int frecMadre = madre.getFrecuenciasAsignadas().get(frec.getId()).getFrecuencia();
                 //System.out.println("Padre: "+frecPadre+" Madre: "+frecMadre+" Nueva: "+frec.getId());
-                if(frecPadre<frecMadre){
-                    intervalo= (int)((frecMadre-frecPadre)*0.5);
-                    nuevaFrecuencia=rd.nextInt(frecMadre+intervalo);
-                    nuevaFrecuencia+=frecPadre;
-                }else{
-                    intervalo=(int)((frecPadre-frecMadre)*0.5);
-                    nuevaFrecuencia=rd.nextInt(frecPadre+intervalo);
-                    nuevaFrecuencia+=frecMadre;
+                if (frecPadre < frecMadre) {
+                    intervalo = (int) ((frecMadre - frecPadre) * 0.5);
+                    nuevaFrecuencia = rd.nextInt(frecMadre + intervalo);
+                    nuevaFrecuencia += frecPadre;
+                } else {
+                    intervalo = (int) ((frecPadre - frecMadre) * 0.5);
+                    nuevaFrecuencia = rd.nextInt(frecPadre + intervalo);
+                    nuevaFrecuencia += frecMadre;
                 }
-                for(int i=0;i<data.getFrecuencias().get(rangoNodo).tamanio();++i){
-                    if(data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i)>nuevaFrecuencia){
-                        nuevaFrecuencia=data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
+                for (int i = 0; i < data.getFrecuencias().get(rangoNodo).tamanio(); ++i) {
+                    if (data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i) > nuevaFrecuencia) {
+                        nuevaFrecuencia = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
                         break;
                     }
-                    if(i==data.getFrecuencias().size()-1){
-                        nuevaFrecuencia=data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
+                    if (i == data.getFrecuencias().size() - 1) {
+                        nuevaFrecuencia = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
                     }
                 }
 
 
-                hijo1.anadeFrecuencia(new FrecAsignada(frec.getId(),nuevaFrecuencia));
+                hijo1.anadeFrecuencia(new FrecAsignada(frec.getId(), nuevaFrecuencia));
 
-                if(frecPadre<frecMadre){
-                    intervalo= (int)((frecMadre-frecPadre)*0.5);
-                    nuevaFrecuencia=rd.nextInt(frecMadre+intervalo);
-                    nuevaFrecuencia+=frecPadre;
-                }else{
-                    intervalo=(int)((frecPadre-frecMadre)*0.5);
-                    nuevaFrecuencia=rd.nextInt(frecPadre+intervalo);
-                    nuevaFrecuencia+=frecMadre;
+                if (frecPadre < frecMadre) {
+                    intervalo = (int) ((frecMadre - frecPadre) * 0.5);
+                    nuevaFrecuencia = rd.nextInt(frecMadre + intervalo);
+                    nuevaFrecuencia += frecPadre;
+                } else {
+                    intervalo = (int) ((frecPadre - frecMadre) * 0.5);
+                    nuevaFrecuencia = rd.nextInt(frecPadre + intervalo);
+                    nuevaFrecuencia += frecMadre;
                 }
-                for(int i=0;i<data.getFrecuencias().get(rangoNodo).tamanio();++i){
-                    if(data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i)>nuevaFrecuencia){
-                        nuevaFrecuencia=data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
+                for (int i = 0; i < data.getFrecuencias().get(rangoNodo).tamanio(); ++i) {
+                    if (data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i) > nuevaFrecuencia) {
+                        nuevaFrecuencia = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
                         break;
                     }
-                    if(i==data.getFrecuencias().size()-1){
-                        nuevaFrecuencia=data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
+                    if (i == data.getFrecuencias().size() - 1) {
+                        nuevaFrecuencia = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
                     }
                 }
-                hijo2.anadeFrecuencia(new FrecAsignada(frec.getId(),nuevaFrecuencia));
+                hijo2.anadeFrecuencia(new FrecAsignada(frec.getId(), nuevaFrecuencia));
 
 
             }
+        }
+    }
+
+    /**
+     * Funcion para aplicar la mutacion a los hijos
+     *
+     * @param hijo
+     */
+
+    public void mutacionDescendiente(Solucion hijo) {
+        if (rd.nextDouble() < 0.02) {
+            for (FrecAsignada f : hijo.getFrecuenciasAsignadas().values()) {
+                //probabilidad de mutacion del gen
+                if (rd.nextDouble() < 0.1) {
+                    int rangoNodo = data.getTransmisores().get(f.getId()).getRango();
+                    int rangoTam = data.getFrecuencias().get(rangoNodo).getFrecuencias().size();
+                    int frecNodo = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(rd.nextInt(rangoTam));
+                    f.setFrecuencia(frecNodo);
+
+                }
+            }
+        }
+    }
+
+    /**
+     * Funcion para reemplazar la peor solucion dentro de la poblacion actual
+     *
+     * @param candidato
+     */
+
+    public void reemplazoPoblacion(Solucion candidato) {
+        int reemplazo = 0;
+        int idReemplazo = 0;
+        for (int i = 0; i < poblacion.size(); ++i) {
+            if (poblacion.get(i).getKey() > reemplazo) {
+                reemplazo = poblacion.get(i).getKey();
+                idReemplazo = i;
+            }
+        }
+        if (poblacion.get(idReemplazo).getKey() > candidato.getPuntuacion()) {
+            poblacion.remove(idReemplazo);
+            poblacion.add(new Pair<>(candidato.getPuntuacion(), candidato));
         }
     }
 
