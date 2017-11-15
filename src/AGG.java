@@ -65,10 +65,10 @@ public class AGG {
             torneoBinario();
 
             //Cruce normal
-            for (int i = 0; i < 18; i += 2) {
+            for (int i = 0; i < 18; ++i) {
 
-                int desde = rd.nextInt(poblacionGanadores.get(0).getFrecuenciasAsignadas().size());
-                int hasta = rd.nextInt(poblacionGanadores.get(0).getFrecuenciasAsignadas().size());
+                int desde = rd.nextInt(poblacionGanadores.get(i).getFrecuenciasAsignadas().size());
+                int hasta = rd.nextInt(poblacionGanadores.get(i).getFrecuenciasAsignadas().size());
                 if (desde > hasta) {
                     int aux = hasta;
                     hasta = desde;
@@ -117,6 +117,7 @@ public class AGG {
                 generacionesSinMejora = 0;
             } else {
                 //Reemplazamiento
+                poblacion.clear();
                 poblacion.putAll(poblacionGanadores);
             }
             ++generacion;

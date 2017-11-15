@@ -40,13 +40,15 @@ public class Main {
         Filemanager fileFinal = filemanager2;
         //fileFinal.imprimeDatos();
         int semillaFinal = SEMILLA1;
-
-
+        /*
         AGE miAGE = new AGE(fileFinal,semillaFinal);
         miAGE.inicializacion();
         miAGE.puntuacionesPoblacion();
         miAGE.ejecucion(20000,2);
         miAGE.puntuacionesPoblacion();
-
+        */
+        AGG myAGG = new AGG(fileFinal,semillaFinal);
+        myAGG.ejecucion(20000);
+        myAGG.mostrarResultados();
     }
 }
