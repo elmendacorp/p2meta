@@ -17,7 +17,7 @@ public class AGG {
         poblacionGanadores = new HashMap<>();
         tamPoblacion = 50;
         mejor = new Solucion();
-        mejor.setPuntuacion(-1);
+        mejor.setPuntuacion(99999999);
         this.semilla = semilla;
         data = datos;
         rd = new Random();
@@ -35,7 +35,7 @@ public class AGG {
             miGreedy.generaSolucion();
             poblacion.put(i, miGreedy.getSolucion());
         }
-        evaluaciones = 50;
+        //evaluaciones += 50;
     }
 
     /**
@@ -43,27 +43,25 @@ public class AGG {
      */
     public void ejecucion(int max) {
         time = System.nanoTime();
-        double puntuacionGeneracionAnterior = 0;
         int generacionesSinMejora = 0;
         int generacion = 0;
+
         while (evaluaciones < max) {
 
             //Elitismo: si la mejor solución de la generación anterior no sobrevive, sustituye directamente la peor solución de la nueva población
-            if (mejor.getPuntuacion() != -1 && !poblacion.containsValue(mejor)) {
-                int peorPos = 0;
-                Solucion arrayPoblacion[] = (Solucion[]) poblacion.values().toArray();
-                for(int i = 0; i< poblacion.values().size(); ++i){
-                    if(arrayPoblacion[i].getPuntuacion() > arrayPoblacion[peorPos].getPuntuacion()){
-                        peorPos = i;
+            if (mejor.getPuntuacion() != 99999999 && !poblacion.containsValue(mejor)) {
+                int posicionPeor = 0;
+                for (int i = 0; i < poblacion.values().size(); ++i) {
+                    if (poblacion.get(i).getPuntuacion() > poblacion.get(posicionPeor).getPuntuacion()) {
+                        posicionPeor = i;
                     }
                 }
-                poblacion.remove(peorPos);
-                poblacion.put(peorPos, mejor);
+                poblacion.remove(posicionPeor);
+                poblacion.put(posicionPeor, mejor);
             }
 
             //Torneo Binario
             torneoBinario();
-
 
             //Cruce normal
             for (int i = 0; i < 18; i += 2) {
@@ -114,10 +112,25 @@ public class AGG {
             poblacionGanadores.get(posMutacion).getFrecuenciasAsignadas().get(idTrx).setFrecuencia(nuevaFr);
 
             //Buscamos la mejor solucion tras la mutacion
-            mejor = calculaPosMejorsolucion(poblacionGanadores.values().toArray());
+            Solucion posibleMejor = calculaMejorsolucion(poblacionGanadores.values().toArray());
 
-            //Reemplazamiento
-            poblacion.putAll(poblacionGanadores);
+            //Si no hemos mejorado
+            if (posibleMejor.getPuntuacion() < mejor.getPuntuacion()) {
+                mejor = posibleMejor;
+            } else {
+                ++generacionesSinMejora;
+            }
+
+            if (generacionesSinMejora == 20) {
+                inicializacion();
+                generacionesSinMejora = 0;
+            } else {
+                //Reemplazamiento
+                poblacion.putAll(poblacionGanadores);
+            }
+            ++generacion;
+
+            System.out.println("Generacion: " + generacion + " .Mejor solucion: " + mejor.getPuntuacion() + ". Evaluaciones " + evaluaciones);
 
         }
         time = System.nanoTime() - time;
@@ -135,7 +148,7 @@ public class AGG {
         }
     }
 
-    private Solucion calculaPosMejorsolucion(Object[] poblaciones) {
+    private Solucion calculaMejorsolucion(Object[] poblaciones) {
         Solucion mejor = new Solucion();
         mejor.setPuntuacion(99999999);
 
@@ -146,7 +159,7 @@ public class AGG {
         return mejor;
     }
 
-    public void mostrarResultados(){
+    public void mostrarResultados() {
         System.out.println("AGG Puntuacion Mejor: " + mejor.getPuntuacion() + " Tiempo de ejecucion: " + time / 1000000 + " ms");
     }
 
