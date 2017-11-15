@@ -99,16 +99,8 @@ public class AGG {
             }
 
             //Mutacion
-
             int posMutacion = rd.nextInt(tamPoblacion);
-            int posTrx = rd.nextInt(poblacionGanadores.get(posMutacion).getFrecuenciasAsignadas().size());
-
-            int idTrx = (Integer) poblacionGanadores.get(posMutacion).getFrecuenciasAsignadas().keySet().toArray()[posTrx];
-
-            int frRandom = rd.nextInt(data.getFrecuencias().get(data.getTransmisores().get(idTrx).getRango()).getFrecuencias().size());
-            int nuevaFr = data.getFrecuencias().get(data.getTransmisores().get(idTrx).getRango()).getFrecuencias().get(frRandom);
-
-            poblacionGanadores.get(posMutacion).getFrecuenciasAsignadas().get(idTrx).setFrecuencia(nuevaFr);
+            mutacion(poblacionGanadores.get(posMutacion));
 
             //Buscamos la mejor solucion tras la mutacion
             Solucion posibleMejor = calculaMejorsolucion(poblacionGanadores.values().toArray());
@@ -162,4 +154,15 @@ public class AGG {
         System.out.println("AGG Puntuacion Mejor: " + mejor.getPuntuacion() + " Tiempo de ejecucion: " + time / 1000000 + " ms");
     }
 
+    public void mutacion(Solucion hijo) {
+        for (FrecAsignada f : hijo.getFrecuenciasAsignadas().values()) {
+            if (rd.nextDouble() < 0.1) {
+                int rangoNodo = data.getTransmisores().get(f.getId()).getRango();
+                int rangoTam = data.getFrecuencias().get(rangoNodo).getFrecuencias().size();
+                int frecNodo = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(rd.nextInt(rangoTam));
+                f.setFrecuencia(frecNodo);
+
+            }
+        }
+    }
 }
