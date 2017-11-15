@@ -34,7 +34,7 @@ public class AGG {
         miGreedy = new Greedy(data, semilla);
         for (int i = 0; i < 50; ++i) {
             miGreedy.generaSolucion();
-            poblacion.put(i, miGreedy.getSolucion());
+            poblacion.put(i,new Solucion(miGreedy.getSolucion()));
         }
         evaluaciones += 50;
     }
@@ -49,13 +49,13 @@ public class AGG {
         int generacion = 0;
 
         while (evaluaciones < max) {
-            System.out.println("Media : " + puntuacionGeneracionAnterior + " Mejor :" + mejor.getPuntuacion());
+
             puntuacionGeneracionAnterior = 0;
             for (int i = 0; i < poblacion.size(); ++i) {
                 puntuacionGeneracionAnterior += poblacion.get(i).getPuntuacion();
             }
             puntuacionGeneracionAnterior = puntuacionGeneracionAnterior / poblacion.size();
-
+            System.out.println(puntuacionGeneracionAnterior);
             //Torneo Binario
             torneoBinario();
 
@@ -92,11 +92,11 @@ public class AGG {
                 }
 
                 poblacionGanadores.remove(posPadre);
-                poblacionGanadores.put(posPadre, hijo1);
+                poblacionGanadores.put(posPadre, new Solucion(hijo1));
                 poblacionGanadores.get(posPadre).calculaRestriccion(data.getRestricciones());
 
                 poblacionGanadores.remove(posMadre);
-                poblacionGanadores.put(posMadre, hijo2);
+                poblacionGanadores.put(posMadre, new Solucion(hijo2));
                 poblacionGanadores.get(posMadre).calculaRestriccion(data.getRestricciones());
 
                 evaluaciones += 2;
@@ -139,7 +139,7 @@ public class AGG {
                 poblacion.clear();
                 for (int i = 0; i < 49; ++i) {
                     miGreedy.generaSolucion();
-                    poblacion.put(i, miGreedy.getSolucion());
+                    poblacion.put(i,new Solucion(miGreedy.getSolucion()));
                 }
                 evaluaciones += 50;
 
@@ -152,26 +152,28 @@ public class AGG {
                     }
                 }
                 poblacion.remove(posicionPeor);
-                poblacion.put(posicionPeor, mejor);
+                poblacion.put(posicionPeor, new Solucion(mejor));
 
             } else {
                 poblacion.clear();
-                poblacion.putAll(poblacionGanadores);
+                poblacion= new HashMap<>(poblacionGanadores);
             }
 
             ++generacion;
+            System.out.println(generacion);
         }
         time = System.nanoTime() - time;
     }
 
     private void torneoBinario() {
+        poblacionGanadores.clear();
         for (int i = 0; i < poblacion.size(); ++i) {
             int posContrincante1 = rd.nextInt(poblacion.size());
             int posContrincante2 = rd.nextInt(poblacion.size());
             if (poblacion.get(posContrincante1).getPuntuacion() < poblacion.get(posContrincante2).getPuntuacion()) {
-                poblacionGanadores.put(i, poblacion.get(posContrincante1));
+                poblacionGanadores.put(i,new Solucion( poblacion.get(posContrincante1)));
             } else {
-                poblacionGanadores.put(i, poblacion.get(posContrincante2));
+                poblacionGanadores.put(i,new Solucion(poblacion.get(posContrincante2)));
             }
         }
     }
