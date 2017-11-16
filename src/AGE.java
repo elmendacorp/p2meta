@@ -1,7 +1,7 @@
 import javafx.util.Pair;
 
-import java.util.*;
-
+import java.util.Random;
+import java.util.Vector;
 
 public class AGE {
     private Vector<Pair<Integer, Solucion>> poblacion;
@@ -11,7 +11,6 @@ public class AGE {
     private int semilla;
     private int evaluaciones;
     private Greedy miGreedy;
-
 
     /**
      * Constructor parametrizado de la clase
@@ -55,14 +54,12 @@ public class AGE {
         int generacion = 0;
         while (evaluaciones < max) {
 
-
             for (int i = 0; i < poblacion.size(); ++i) {
                 puntuacionGeneracionAnterior += poblacion.get(i).getValue().getPuntuacion();
             }
             puntuacionGeneracionAnterior = puntuacionGeneracionAnterior / poblacion.size();
 
-            //seleccionamos la pareja que va a cruzarse
-
+            //Seleccionamos la pareja que va a cruzarse
             Solucion padre, madre;
             int contrincante1 = rd.nextInt(50);
             int contrincante2 = rd.nextInt(50);
@@ -80,45 +77,41 @@ public class AGE {
             }
 
             Solucion hijo1, hijo2;
-
-            //cruce de los padres
+            //Cruce de los padres
             hijo1 = new Solucion();
             hijo2 = new Solucion();
             cruzamiento(padre, madre, hijo1, hijo2, tipo);
 
             evaluaciones += 2;
 
-            //mutacion de los hijos
-
+            //Mutacion de los hijos
             mutacionDescendiente(hijo1);
             mutacionDescendiente(hijo2);
 
             hijo1.calculaRestriccion(data.getRestricciones());
             hijo2.calculaRestriccion(data.getRestricciones());
 
-            //reemplazo dentro de la poblacion
+            //Reemplazo dentro de la poblacion
             reemplazoPoblacion(hijo1);
             reemplazoPoblacion(hijo2);
 
-            //mejor solucion de la poblacion
-            int mayor = 999999999;
-            for (int i = 0; i < poblacion.size(); ++i) {
-                if (poblacion.get(i).getKey() < mayor) {
-                    mayor = poblacion.get(i).getKey();
+            //Mejor solucion de la poblacion
+            int mayor = 999999;
+            for (Pair<Integer, Solucion> aPoblacion1 : poblacion) {
+                if (aPoblacion1.getKey() < mayor) {
+                    mayor = aPoblacion1.getKey();
                 }
             }
 
-
-            //calculos para la reinicializacion
+            //Calculos para la reinicializacion
             Vector<Integer> puntuaciones = new Vector<>();
 
-
-            //calculo del numero de individuos diferentes dentro de la poblacion
+            //Calculo del numero de individuos diferentes dentro de la poblacion
             double puntuacionNuevaGeneracion = 0;
-            for (int i = 0; i < poblacion.size(); ++i) {
-                puntuacionNuevaGeneracion += poblacion.get(i).getValue().getPuntuacion();
-                if (!puntuaciones.contains(poblacion.get(i).getValue().getPuntuacion())) {
-                    puntuaciones.add(poblacion.get(i).getValue().getPuntuacion());
+            for (Pair<Integer, Solucion> aPoblacion : poblacion) {
+                puntuacionNuevaGeneracion += aPoblacion.getValue().getPuntuacion();
+                if (!puntuaciones.contains(aPoblacion.getValue().getPuntuacion())) {
+                    puntuaciones.add(aPoblacion.getValue().getPuntuacion());
                 }
             }
             puntuacionNuevaGeneracion = puntuacionNuevaGeneracion / poblacion.size();
@@ -131,16 +124,15 @@ public class AGE {
                 generacionesSinMejora = 0;
             }
 
-
-            Solucion mejor;
-            int indiceMejor = 0;
-            int puntuacionMejor = 999999999;
-
-            //reinicializacion de la poblacion
+            //Reinicializamos si no mejoramos en 20 generacion o el 80% de los individuos son el mismo
             if (generacionesSinMejora >= 20 || (puntuaciones.size() <= poblacion.size() * 0.2)) {
                 generacionesSinMejora = 0;
-                //System.out.println("Reinicializa");
-                //seleccion del mejor candidato
+
+                Solucion mejor;
+                int indiceMejor = 0;
+                int puntuacionMejor = 999999;
+
+                //Seleccion del mejor candidato
                 for (int i = 0; i < poblacion.size(); ++i) {
                     if (poblacion.get(i).getKey() < puntuacionMejor) {
                         indiceMejor = i;
@@ -150,7 +142,7 @@ public class AGE {
                 mejor = new Solucion(poblacion.get(indiceMejor).getValue());
                 poblacion = new Vector<>();
                 poblacion.add(new Pair<>(mejor.getPuntuacion(), mejor));
-                //se completa la poblacion con soluciones greedy
+                //Se completa la poblacion con soluciones greedy
                 for (int i = 0; i < 49; ++i) {
                     miGreedy.generaSolucion();
                     poblacion.add(new Pair<>(miGreedy.getSolucion().getPuntuacion(), miGreedy.getSolucion()));
@@ -159,8 +151,6 @@ public class AGE {
             }
 
             ++generacion;
-
-
         }
         time = System.nanoTime() - time;
     }
@@ -184,7 +174,7 @@ public class AGE {
                 inicio = fin;
                 fin = tmp;
             }
-            //sustituimos las posiciones por sus respectivos identificadores de transmisor
+            //Sustituimos las posiciones por sus respectivos identificadores de transmisor
             inicio = (Integer) padre.getFrecuenciasAsignadas().keySet().toArray()[inicio];
             fin = (Integer) padre.getFrecuenciasAsignadas().keySet().toArray()[fin];
             for (FrecAsignada f : padre.getFrecuenciasAsignadas().values()) {
@@ -225,7 +215,6 @@ public class AGE {
                     }
                 }
 
-
                 hijo1.anadeFrecuencia(new FrecAsignada(frec.getId(), nuevaFrecuencia));
 
                 if (frecPadre < frecMadre) {
@@ -248,7 +237,6 @@ public class AGE {
                 }
                 hijo2.anadeFrecuencia(new FrecAsignada(frec.getId(), nuevaFrecuencia));
 
-
             }
         }
     }
@@ -256,10 +244,9 @@ public class AGE {
     /**
      * Funcion para aplicar la mutacion a los hijos
      *
-     * @param hijo
+     * @param hijo Solucion para mutar
      */
-
-    public void mutacionDescendiente(Solucion hijo) {
+    private void mutacionDescendiente(Solucion hijo) {
         if (rd.nextDouble() < 0.02) {
             for (FrecAsignada f : hijo.getFrecuenciasAsignadas().values()) {
                 //probabilidad de mutacion del gen
@@ -277,10 +264,9 @@ public class AGE {
     /**
      * Funcion para reemplazar la peor solucion dentro de la poblacion actual
      *
-     * @param candidato
+     * @param candidato Solucion que reemplazara
      */
-
-    public void reemplazoPoblacion(Solucion candidato) {
+    private void reemplazoPoblacion(Solucion candidato) {
         int reemplazo = 0;
         int idReemplazo = 0;
         for (int i = 0; i < poblacion.size(); ++i) {
@@ -295,11 +281,14 @@ public class AGE {
         }
     }
 
+    /**
+     * Funcion para mostrar por pantalla la mejor puntuacion y el tiempo de ejecucion
+     */
     public void puntuacionesPoblacion() {
-        int mejor = 999999999;
-        for (int i = 0; i < poblacion.size(); ++i) {
-            if (poblacion.get(i).getKey() < mejor) {
-                mejor = poblacion.get(i).getKey();
+        int mejor = 999999;
+        for (Pair<Integer, Solucion> aPoblacion : poblacion) {
+            if (aPoblacion.getKey() < mejor) {
+                mejor = aPoblacion.getKey();
             }
         }
         System.out.println("AGE Puntuacion Mejor: " + mejor + " Tiempo de ejecucion: " + time / 1000000 + " ms");

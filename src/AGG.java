@@ -17,7 +17,7 @@ public class AGG {
         poblacion = new HashMap<>();
         poblacionGanadores = new HashMap<>();
         mejor = new Solucion();
-        mejor.setPuntuacion(99999999);
+        mejor.setPuntuacion(999999);
         this.semilla = semilla;
         data = datos;
         rd = new Random();
@@ -134,14 +134,13 @@ public class AGG {
             if (generacionesSinMejora >= 20 || (puntuaciones.size() <= poblacionGanadores.size() * 0.2)) {
                 generacionesSinMejora = 0;
                 poblacion.clear();
-                for (int i = 0; i < 49; ++i) {
+                for (int i = 0; i < 50; ++i) {
                     miGreedy.generaSolucion();
                     poblacion.put(i, new Solucion(miGreedy.getSolucion()));
                 }
                 evaluaciones += 50;
 
                 //Elitismo: si la mejor solución de la generación anterior no sobrevive, sustituye directamente la peor solución de la nueva población
-                //volver a mirar cual es la peor
                 int posicionPeor = 0;
                 for (int i = 0; i < poblacionGanadores.values().size(); ++i) {
                     if (poblacionGanadores.get(i).getPuntuacion() > poblacionGanadores.get(posicionPeor).getPuntuacion()) {
@@ -177,6 +176,8 @@ public class AGG {
 
     /**
      * Metodo para obtener la mejor solucion dado un array.
+     *
+     * @param poblaciones Array de objetos que tendra la poblacion de soluciones.
      */
     private Solucion calculaMejorsolucion(Object[] poblaciones) {
         Solucion masBaja = new Solucion();
@@ -198,6 +199,8 @@ public class AGG {
 
     /**
      * Metodo para mutar una solucion dada
+     *
+     * @param hijo Solucion para mutar
      */
     private void mutacion(Solucion hijo) {
         for (FrecAsignada f : hijo.getFrecuenciasAsignadas().values()) {

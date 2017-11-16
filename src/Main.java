@@ -19,7 +19,7 @@ public class Main {
     public static final int SEMILLA5 = 14227736;
     public static final int SEMILLARETO = 21025923;
 
-    public static Vector<Solucion> soluciones= new Vector<>();
+    public static Vector<Solucion> soluciones = new Vector<>();
 
     public static void main(String[] args) {
 
@@ -35,19 +35,17 @@ public class Main {
         Filemanager filemanager10 = new Filemanager("./archivos_guion/instancias/scen09/");
         Filemanager filemanager11 = new Filemanager("./archivos_guion/instancias/scen10/");
 
-
-
         Filemanager fileFinal = filemanager2;
         //fileFinal.imprimeDatos();
         int semillaFinal = SEMILLA1;
-        /*
+
         AGE miAGE = new AGE(fileFinal,semillaFinal);
         miAGE.inicializacion();
         miAGE.puntuacionesPoblacion();
         miAGE.ejecucion(20000,2);
         miAGE.puntuacionesPoblacion();
-        */
-        AGG myAGG = new AGG(fileFinal,semillaFinal);
+
+        AGG myAGG = new AGG(fileFinal, semillaFinal);
         myAGG.ejecucion(20000);
         myAGG.mostrarResultados();
     }
