@@ -33,11 +33,27 @@ public class Main2 {
             System.out.println("---------------------------------------------");
 
             for (Integer in : semillaFinal) {
-                AGE miAGE = new AGE(fl,in);
+                //AGE sin blx
+                AGE miAGE = new AGE(fl, in);
                 miAGE.inicializacion();
-                miAGE.puntuacionesPoblacion();
                 miAGE.ejecucion(20000, 1);
                 miAGE.puntuacionesPoblacion();
+
+                //AGE con blx
+                AGE miAGE2 = new AGE(fl, in);
+                miAGE2.inicializacion();
+                miAGE2.ejecucion(20000, 2);
+                miAGE2.puntuacionesPoblacion();
+
+                //AGG sin blx
+                AGG myAGG = new AGG(fl, in, false);
+                myAGG.ejecucion(20000);
+                myAGG.mostrarResultados();
+
+                //AGG con blx
+                AGG myAGG2 = new AGG(fl, in, true);
+                myAGG2.ejecucion(20000);
+                myAGG2.mostrarResultados();
                 System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>");
             }
         }
