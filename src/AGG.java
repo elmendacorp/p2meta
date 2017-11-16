@@ -24,7 +24,6 @@ public class AGG {
         rd.setSeed(semilla);
         evaluaciones = 0;
         inicializacion();
-        calculaMejorsolucion(poblacion.values().toArray());
     }
 
     /**
@@ -34,7 +33,7 @@ public class AGG {
         miGreedy = new Greedy(data, semilla);
         for (int i = 0; i < 50; ++i) {
             miGreedy.generaSolucion();
-            poblacion.put(i,new Solucion(miGreedy.getSolucion()));
+            poblacion.put(i, new Solucion(miGreedy.getSolucion()));
         }
         evaluaciones += 50;
     }
@@ -46,16 +45,16 @@ public class AGG {
         time = System.nanoTime();
         double puntuacionGeneracionAnterior = 0;
         int generacionesSinMejora = 0;
-        int generacion = 0;
 
         while (evaluaciones < max) {
 
+            //Calcula la puntuacion media de la poblacion anterior
             puntuacionGeneracionAnterior = 0;
             for (int i = 0; i < poblacion.size(); ++i) {
                 puntuacionGeneracionAnterior += poblacion.get(i).getPuntuacion();
             }
             puntuacionGeneracionAnterior = puntuacionGeneracionAnterior / poblacion.size();
-            System.out.println(puntuacionGeneracionAnterior);
+
             //Torneo Binario
             torneoBinario();
 
@@ -113,8 +112,8 @@ public class AGG {
                 mejor = posibleMejor;
             }
 
+            //Calculamos el numero de individuos diferentes dentro de la poblacion
             Vector<Integer> puntuaciones = new Vector<>();
-            //calculo del numero de individuos diferentes dentro de la poblacion
             double puntuacionNuevaGeneracion = 0;
             for (int i = 0; i < poblacionGanadores.size(); ++i) {
                 puntuacionNuevaGeneracion += poblacionGanadores.get(i).getPuntuacion();
@@ -124,7 +123,6 @@ public class AGG {
             }
             puntuacionNuevaGeneracion = puntuacionNuevaGeneracion / poblacionGanadores.size();
 
-            //System.out.println("Media ahora: " + puntuacionNuevaGeneracion);
             //Miramos si hemos mejorado la media en esta generacion
             if (puntuacionGeneracionAnterior >= puntuacionNuevaGeneracion) {
                 ++generacionesSinMejora;
@@ -132,14 +130,13 @@ public class AGG {
                 generacionesSinMejora = 0;
             }
 
-            //Reinicializamos si no mejoramos en 20 generacion o el 80% de los individuos se parecen demasiado
+            //Reinicializamos si no mejoramos en 20 generacion o el 80% de los individuos son el mismo
             if (generacionesSinMejora >= 20 || (puntuaciones.size() <= poblacionGanadores.size() * 0.2)) {
                 generacionesSinMejora = 0;
-                System.out.println("Reinicio");
                 poblacion.clear();
                 for (int i = 0; i < 49; ++i) {
                     miGreedy.generaSolucion();
-                    poblacion.put(i,new Solucion(miGreedy.getSolucion()));
+                    poblacion.put(i, new Solucion(miGreedy.getSolucion()));
                 }
                 evaluaciones += 50;
 
@@ -156,28 +153,31 @@ public class AGG {
 
             } else {
                 poblacion.clear();
-                poblacion= new HashMap<>(poblacionGanadores);
+                poblacion = new HashMap<>(poblacionGanadores);
             }
-
-            ++generacion;
-            System.out.println(generacion);
         }
         time = System.nanoTime() - time;
     }
 
+    /**
+     * Metodo para obtener la mejor de dos soluciones escogidas aleatoriamente, de la poblacion.
+     */
     private void torneoBinario() {
         poblacionGanadores.clear();
         for (int i = 0; i < poblacion.size(); ++i) {
             int posContrincante1 = rd.nextInt(poblacion.size());
             int posContrincante2 = rd.nextInt(poblacion.size());
             if (poblacion.get(posContrincante1).getPuntuacion() < poblacion.get(posContrincante2).getPuntuacion()) {
-                poblacionGanadores.put(i,new Solucion( poblacion.get(posContrincante1)));
+                poblacionGanadores.put(i, new Solucion(poblacion.get(posContrincante1)));
             } else {
-                poblacionGanadores.put(i,new Solucion(poblacion.get(posContrincante2)));
+                poblacionGanadores.put(i, new Solucion(poblacion.get(posContrincante2)));
             }
         }
     }
 
+    /**
+     * Metodo para obtener la mejor solucion dado un array.
+     */
     private Solucion calculaMejorsolucion(Object[] poblaciones) {
         Solucion masBaja = new Solucion();
         masBaja.setPuntuacion(999999);
@@ -189,11 +189,17 @@ public class AGG {
         return masBaja;
     }
 
+    /**
+     * Metodo simple para mostrar por pantalla la puntuacion y el tiempo de ejecucion del algoritmo
+     */
     public void mostrarResultados() {
         System.out.println("AGG Puntuacion Mejor: " + mejor.getPuntuacion() + " Tiempo de ejecucion: " + time / 1000000 + " ms");
     }
 
-    public void mutacion(Solucion hijo) {
+    /**
+     * Metodo para mutar una solucion dada
+     */
+    private void mutacion(Solucion hijo) {
         for (FrecAsignada f : hijo.getFrecuenciasAsignadas().values()) {
             if (rd.nextDouble() < 0.1) {
                 int rangoNodo = data.getTransmisores().get(f.getId()).getRango();
