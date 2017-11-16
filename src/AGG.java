@@ -7,17 +7,19 @@ public class AGG {
     private HashMap<Integer, Solucion> poblacionGanadores;
     private Solucion mejor;
     private Greedy miGreedy;
+    private boolean blx;
     private float time;
     private Random rd;
     private Filemanager data;
     private int semilla;
     private int evaluaciones;
 
-    public AGG(Filemanager datos, int semilla) {
+    public AGG(Filemanager datos, int semilla, boolean usarBLX) {
         poblacion = new HashMap<>();
         poblacionGanadores = new HashMap<>();
         mejor = new Solucion();
         mejor.setPuntuacion(999999);
+        blx = usarBLX;
         this.semilla = semilla;
         data = datos;
         rd = new Random();
@@ -58,48 +60,18 @@ public class AGG {
             //Torneo Binario
             torneoBinario();
 
-            //Cruce normal
-            for (int i = 0; i < 18; ++i) {
-
-                int desde = rd.nextInt(poblacionGanadores.get(0).getFrecuenciasAsignadas().size());
-                int hasta = rd.nextInt(poblacionGanadores.get(0).getFrecuenciasAsignadas().size());
-                if (desde > hasta) {
-                    int aux = hasta;
-                    hasta = desde;
-                    desde = aux;
-                }
-
-                int posPadre = rd.nextInt(poblacionGanadores.size());
-                int posMadre = rd.nextInt(poblacionGanadores.size());
-                while (posMadre == posPadre) {
-                    posMadre = rd.nextInt(poblacionGanadores.size());
-                }
-
-                Solucion padre = poblacionGanadores.get(posPadre);
-                Solucion madre = poblacionGanadores.get(posMadre);
-                Solucion hijo1 = new Solucion();
-                Solucion hijo2 = new Solucion();
-
-                for (FrecAsignada f : padre.getFrecuenciasAsignadas().values()) {
-                    if (f.getId() >= desde && f.getId() <= hasta) {
-                        hijo1.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
-                        hijo2.getFrecuenciasAsignadas().put(f.getId(), f);
-                    } else {
-                        hijo1.getFrecuenciasAsignadas().put(f.getId(), f);
-                        hijo2.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
-                    }
-                }
-
-                poblacionGanadores.remove(posPadre);
-                poblacionGanadores.put(posPadre, new Solucion(hijo1));
-                poblacionGanadores.get(posPadre).calculaRestriccion(data.getRestricciones());
-
-                poblacionGanadores.remove(posMadre);
-                poblacionGanadores.put(posMadre, new Solucion(hijo2));
-                poblacionGanadores.get(posMadre).calculaRestriccion(data.getRestricciones());
-
-                evaluaciones += 2;
+            //Cruzamiento
+            int posPadre = rd.nextInt(poblacionGanadores.size());
+            int posMadre = rd.nextInt(poblacionGanadores.size());
+            while (posMadre == posPadre) {
+                posMadre = rd.nextInt(poblacionGanadores.size());
             }
+
+            Solucion padre = poblacionGanadores.get(posPadre);
+            Solucion madre = poblacionGanadores.get(posMadre);
+            Solucion hijo1 = new Solucion();
+            Solucion hijo2 = new Solucion();
+            cruzamiento(padre, posPadre, madre, posMadre, hijo1, hijo2);
 
             //Mutacion
             int posMutacion = rd.nextInt(poblacionGanadores.values().size());
@@ -158,6 +130,95 @@ public class AGG {
         time = System.nanoTime() - time;
     }
 
+    private void cruzamiento(Solucion padre, int posPadre, Solucion madre, int posMadre, Solucion hijo1, Solucion hijo2) {
+        //Cruce normal
+        if (!blx) {
+            for (int i = 0; i < 18; ++i) {
+
+                int desde = rd.nextInt(poblacionGanadores.get(0).getFrecuenciasAsignadas().size());
+                int hasta = rd.nextInt(poblacionGanadores.get(0).getFrecuenciasAsignadas().size());
+                if (desde > hasta) {
+                    int aux = hasta;
+                    hasta = desde;
+                    desde = aux;
+                }
+
+                for (FrecAsignada f : padre.getFrecuenciasAsignadas().values()) {
+                    if (f.getId() >= desde && f.getId() <= hasta) {
+                        hijo1.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
+                        hijo2.getFrecuenciasAsignadas().put(f.getId(), f);
+                    } else {
+                        hijo1.getFrecuenciasAsignadas().put(f.getId(), f);
+                        hijo2.getFrecuenciasAsignadas().put(madre.getFrecuenciasAsignadas().get(f.getId()).getId(), madre.getFrecuenciasAsignadas().get(f.getId()));
+                    }
+                }
+
+                poblacionGanadores.remove(posPadre);
+                poblacionGanadores.put(posPadre, new Solucion(hijo1));
+                poblacionGanadores.get(posPadre).calculaRestriccion(data.getRestricciones());
+
+                poblacionGanadores.remove(posMadre);
+                poblacionGanadores.put(posMadre, new Solucion(hijo2));
+                poblacionGanadores.get(posMadre).calculaRestriccion(data.getRestricciones());
+
+                evaluaciones += 2;
+
+            }
+            //Cruce con BLX
+        } else {
+            for (FrecAsignada frec : padre.getFrecuenciasAsignadas().values()) {
+
+                int rangoNodo = data.getTransmisores().get(frec.getId()).getRango();
+                int intervalo, nuevaFrecuencia;
+                int frecPadre = frec.getFrecuencia();
+                int frecMadre = madre.getFrecuenciasAsignadas().get(frec.getId()).getFrecuencia();
+
+                if (frecPadre < frecMadre) {
+                    intervalo = (int) ((frecMadre - frecPadre) * 0.5);
+                    nuevaFrecuencia = rd.nextInt(frecMadre + intervalo);
+                    nuevaFrecuencia += frecPadre;
+                } else {
+                    intervalo = (int) ((frecPadre - frecMadre) * 0.5);
+                    nuevaFrecuencia = rd.nextInt(frecPadre + intervalo);
+                    nuevaFrecuencia += frecMadre;
+                }
+                for (int i = 0; i < data.getFrecuencias().get(rangoNodo).tamanio(); ++i) {
+                    if (data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i) > nuevaFrecuencia) {
+                        nuevaFrecuencia = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
+                        break;
+                    }
+                    if (i == data.getFrecuencias().size() - 1) {
+                        nuevaFrecuencia = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
+                    }
+                }
+
+                hijo1.anadeFrecuencia(new FrecAsignada(frec.getId(), nuevaFrecuencia));
+
+                if (frecPadre < frecMadre) {
+                    intervalo = (int) ((frecMadre - frecPadre) * 0.5);
+                    nuevaFrecuencia = rd.nextInt(frecMadre + intervalo);
+                    nuevaFrecuencia += frecPadre;
+                } else {
+                    intervalo = (int) ((frecPadre - frecMadre) * 0.5);
+                    nuevaFrecuencia = rd.nextInt(frecPadre + intervalo);
+                    nuevaFrecuencia += frecMadre;
+                }
+                for (int i = 0; i < data.getFrecuencias().get(rangoNodo).tamanio(); ++i) {
+                    if (data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i) > nuevaFrecuencia) {
+                        nuevaFrecuencia = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
+                        break;
+                    }
+                    if (i == data.getFrecuencias().size() - 1) {
+                        nuevaFrecuencia = data.getFrecuencias().get(rangoNodo).getFrecuencias().get(i);
+                    }
+                }
+
+                hijo2.anadeFrecuencia(new FrecAsignada(frec.getId(), nuevaFrecuencia));
+            }
+        }
+    }
+
+
     /**
      * Metodo para obtener la mejor de dos soluciones escogidas aleatoriamente, de la poblacion.
      */
@@ -194,7 +255,11 @@ public class AGG {
      * Metodo simple para mostrar por pantalla la puntuacion y el tiempo de ejecucion del algoritmo
      */
     public void mostrarResultados() {
-        System.out.println("AGG Puntuacion Mejor: " + mejor.getPuntuacion() + " Tiempo de ejecucion: " + time / 1000000 + " ms");
+        if (!blx) {
+            System.out.println("AGG sin BLX, Puntuacion Mejor: " + mejor.getPuntuacion() + " Tiempo de ejecucion: " + time / 1000000 + " ms");
+        } else {
+            System.out.println("AGG con BLX, Puntuacion Mejor: " + mejor.getPuntuacion() + " Tiempo de ejecucion: " + time / 1000000 + " ms");
+        }
     }
 
     /**

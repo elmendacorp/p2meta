@@ -35,18 +35,33 @@ public class Main {
         Filemanager filemanager10 = new Filemanager("./archivos_guion/instancias/scen09/");
         Filemanager filemanager11 = new Filemanager("./archivos_guion/instancias/scen10/");
 
-        Filemanager fileFinal = filemanager2;
+        Filemanager fileFinal = filemanager1;
         //fileFinal.imprimeDatos();
         int semillaFinal = SEMILLA1;
 
-        AGE miAGE = new AGE(fileFinal,semillaFinal);
+        //AGE sin blx
+        AGE miAGE = new AGE(fileFinal, semillaFinal);
         miAGE.inicializacion();
         miAGE.puntuacionesPoblacion();
-        miAGE.ejecucion(20000,2);
+        miAGE.ejecucion(20000, 1);
         miAGE.puntuacionesPoblacion();
 
-        AGG myAGG = new AGG(fileFinal, semillaFinal);
+        //AGE con blx
+        AGE miAGE2 = new AGE(fileFinal, semillaFinal);
+        miAGE2.inicializacion();
+        miAGE2.puntuacionesPoblacion();
+        miAGE2.ejecucion(20000, 2);
+        miAGE2.puntuacionesPoblacion();
+
+        //AGG sin blx
+        AGG myAGG = new AGG(fileFinal, semillaFinal, false);
         myAGG.ejecucion(20000);
         myAGG.mostrarResultados();
+
+        //AGG con blx
+        AGG myAGG2 = new AGG(fileFinal, semillaFinal, true);
+        myAGG2.ejecucion(20000);
+        myAGG2.mostrarResultados();
+
     }
 }
