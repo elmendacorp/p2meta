@@ -45,17 +45,18 @@ public class AGG {
      */
     public void ejecucion(int max) {
         time = System.nanoTime();
-        double puntuacionGeneracionAnterior = 0;
+        int mejorGeneracionAnterior = 9999999;
         int generacionesSinMejora = 0;
 
         while (evaluaciones < max) {
 
             //Calcula la puntuacion media de la poblacion anterior
-            puntuacionGeneracionAnterior = 0;
+            mejorGeneracionAnterior = 9999999;
             for (int i = 0; i < poblacion.size(); ++i) {
-                puntuacionGeneracionAnterior += poblacion.get(i).getPuntuacion();
+                if(poblacion.get(i).getPuntuacion()<mejorGeneracionAnterior){
+                    mejorGeneracionAnterior=poblacion.get(i).getPuntuacion();
+                }
             }
-            puntuacionGeneracionAnterior = puntuacionGeneracionAnterior / poblacion.size();
 
             //Torneo Binario
             torneoBinario();
@@ -86,17 +87,18 @@ public class AGG {
 
             //Calculamos el numero de individuos diferentes dentro de la poblacion
             Vector<Integer> puntuaciones = new Vector<>();
-            double puntuacionNuevaGeneracion = 0;
+            int mejorNuevaGeneracion = 99999999;
             for (int i = 0; i < poblacionGanadores.size(); ++i) {
-                puntuacionNuevaGeneracion += poblacionGanadores.get(i).getPuntuacion();
+                if(poblacionGanadores.get(i).getPuntuacion()<mejorNuevaGeneracion){
+                    mejorNuevaGeneracion=poblacionGanadores.get(i).getPuntuacion();
+                }
                 if (!puntuaciones.contains(poblacionGanadores.get(i).getPuntuacion())) {
                     puntuaciones.add(poblacionGanadores.get(i).getPuntuacion());
                 }
             }
-            puntuacionNuevaGeneracion = puntuacionNuevaGeneracion / poblacionGanadores.size();
 
             //Miramos si hemos mejorado la media en esta generacion
-            if (puntuacionGeneracionAnterior >= puntuacionNuevaGeneracion) {
+            if (mejorGeneracionAnterior >= mejorNuevaGeneracion) {
                 ++generacionesSinMejora;
             } else {
                 generacionesSinMejora = 0;

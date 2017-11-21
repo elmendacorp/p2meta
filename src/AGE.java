@@ -49,16 +49,16 @@ public class AGE {
 
     public void ejecucion(int max, int tipo) {
         time = System.nanoTime();
-        double puntuacionGeneracionAnterior = 0;
+        int mejorAnterior = 99999999;
         int generacionesSinMejora = 0;
         int generacion = 0;
         while (evaluaciones < max) {
-
+            mejorAnterior = 99999999;
             for (int i = 0; i < poblacion.size(); ++i) {
-                puntuacionGeneracionAnterior += poblacion.get(i).getValue().getPuntuacion();
+               if(poblacion.get(i).getKey()<mejorAnterior){
+                   mejorAnterior=poblacion.get(i).getKey();
+               }
             }
-            puntuacionGeneracionAnterior = puntuacionGeneracionAnterior / poblacion.size();
-
             //Seleccionamos la pareja que va a cruzarse
             Solucion padre, madre;
             int contrincante1 = rd.nextInt(50);
@@ -107,18 +107,19 @@ public class AGE {
             Vector<Integer> puntuaciones = new Vector<>();
 
             //Calculo del numero de individuos diferentes dentro de la poblacion
-            double puntuacionNuevaGeneracion = 0;
+            int mejorNuevaGeneracion = 9999999;
             for (Pair<Integer, Solucion> aPoblacion : poblacion) {
-                puntuacionNuevaGeneracion += aPoblacion.getValue().getPuntuacion();
+                if(aPoblacion.getKey()<mejorNuevaGeneracion){
+                    mejorNuevaGeneracion=aPoblacion.getKey();
+                }
                 if (!puntuaciones.contains(aPoblacion.getValue().getPuntuacion())) {
                     puntuaciones.add(aPoblacion.getValue().getPuntuacion());
                 }
             }
-            puntuacionNuevaGeneracion = puntuacionNuevaGeneracion / poblacion.size();
 
             //System.out.println("Puntuacion Mejor: " + mayor + " Generacion: " + generacion+" Media: "+puntuacionNuevaGeneracion);
 
-            if (puntuacionGeneracionAnterior >= puntuacionNuevaGeneracion) {
+            if (mejorAnterior >= mejorNuevaGeneracion) {
                 ++generacionesSinMejora;
             } else {
                 generacionesSinMejora = 0;
