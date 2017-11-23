@@ -1,4 +1,4 @@
-"C:\Program Files\Java\jdk-9\bin\java" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.2.5\lib\idea_rt.jar=49659:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.2.5\bin" -Dfile.encoding=UTF-8 -classpath C:\Users\Vossile\IdeaProjects\p2meta\out\production\p2meta;C:\Users\Vossile\IdeaProjects\p2meta\src\google-collections-1.0.jar Main2
+"C:\Program Files\Java\jdk-9\bin\java" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.2.5\lib\idea_rt.jar=56575:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.2.5\bin" -Dfile.encoding=UTF-8 -classpath C:\Users\Vossile\IdeaProjects\p2meta\out\production\p2meta;C:\Users\Vossile\IdeaProjects\p2meta\src\google-collections-1.0.jar Main2
 Fin carga: ./archivos_guion/instancias/graph05/ -> Transmisores: 200 Frecuencias: 8 Restricciones: 1034
 Fin carga: ./archivos_guion/instancias/graph06/ -> Transmisores: 400 Frecuencias: 8 Restricciones: 1970
 Fin carga: ./archivos_guion/instancias/graph07/ -> Transmisores: 400 Frecuencias: 8 Restricciones: 1970
@@ -11,290 +11,290 @@ Fin carga: ./archivos_guion/instancias/scen08/ -> Transmisores: 916 Frecuencias:
 Fin carga: ./archivos_guion/instancias/scen09/ -> Transmisores: 680 Frecuencias: 8 Restricciones: 3763
 Fin carga: ./archivos_guion/instancias/scen10/ -> Transmisores: 680 Frecuencias: 8 Restricciones: 3763
 ---------------------------------------------
-AGE Puntuacion Mejor: 285 Tiempo de ejecucion: 13298.303 ms
-AGE Puntuacion Mejor: 285 Tiempo de ejecucion: 13465.026 ms
-AGG sin BLX, Puntuacion Mejor: 312 Tiempo de ejecucion: 6339.166 ms
-AGG con BLX, Puntuacion Mejor: 285 Tiempo de ejecucion: 10795.353 ms
+AGE Puntuacion Mejor: 328 Tiempo de ejecucion: 1224.7368 ms
+AGE Puntuacion Mejor: 328 Tiempo de ejecucion: 1795.1621 ms
+AGG sin BLX, Puntuacion Mejor: 312 Tiempo de ejecucion: 6140.461 ms
+AGG con BLX, Puntuacion Mejor: 285 Tiempo de ejecucion: 10200.547 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 308 Tiempo de ejecucion: 13133.414 ms
-AGE Puntuacion Mejor: 308 Tiempo de ejecucion: 13254.787 ms
-AGG sin BLX, Puntuacion Mejor: 315 Tiempo de ejecucion: 6447.1694 ms
-AGG con BLX, Puntuacion Mejor: 312 Tiempo de ejecucion: 10463.478 ms
+AGE Puntuacion Mejor: 312 Tiempo de ejecucion: 1300.2343 ms
+AGE Puntuacion Mejor: 330 Tiempo de ejecucion: 1358.9545 ms
+AGG sin BLX, Puntuacion Mejor: 315 Tiempo de ejecucion: 6232.736 ms
+AGG con BLX, Puntuacion Mejor: 312 Tiempo de ejecucion: 10083.106 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 285 Tiempo de ejecucion: 12995.526 ms
-AGE Puntuacion Mejor: 285 Tiempo de ejecucion: 13209.96 ms
-AGG sin BLX, Puntuacion Mejor: 312 Tiempo de ejecucion: 6498.55 ms
-AGG con BLX, Puntuacion Mejor: 285 Tiempo de ejecucion: 10621.8125 ms
+AGE Puntuacion Mejor: 319 Tiempo de ejecucion: 1082.1304 ms
+AGE Puntuacion Mejor: 320 Tiempo de ejecucion: 1342.1772 ms
+AGG sin BLX, Puntuacion Mejor: 312 Tiempo de ejecucion: 6283.0674 ms
+AGG con BLX, Puntuacion Mejor: 285 Tiempo de ejecucion: 10108.272 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 285 Tiempo de ejecucion: 13080.985 ms
-AGE Puntuacion Mejor: 285 Tiempo de ejecucion: 13302.235 ms
-AGG sin BLX, Puntuacion Mejor: 306 Tiempo de ejecucion: 6399.9834 ms
-AGG con BLX, Puntuacion Mejor: 308 Tiempo de ejecucion: 10556.801 ms
+AGE Puntuacion Mejor: 330 Tiempo de ejecucion: 1040.1874 ms
+AGE Puntuacion Mejor: 330 Tiempo de ejecucion: 1333.7887 ms
+AGG sin BLX, Puntuacion Mejor: 306 Tiempo de ejecucion: 6157.2383 ms
+AGG con BLX, Puntuacion Mejor: 308 Tiempo de ejecucion: 10074.718 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 285 Tiempo de ejecucion: 13166.969 ms
-AGE Puntuacion Mejor: 285 Tiempo de ejecucion: 13307.216 ms
-AGG sin BLX, Puntuacion Mejor: 285 Tiempo de ejecucion: 6528.6963 ms
-AGG con BLX, Puntuacion Mejor: 285 Tiempo de ejecucion: 10568.073 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
----------------------------------------------
-AGE Puntuacion Mejor: 545 Tiempo de ejecucion: 26233.273 ms
-AGE Puntuacion Mejor: 545 Tiempo de ejecucion: 26648.773 ms
-AGG sin BLX, Puntuacion Mejor: 546 Tiempo de ejecucion: 13189.514 ms
-AGG con BLX, Puntuacion Mejor: 545 Tiempo de ejecucion: 20523.777 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 545 Tiempo de ejecucion: 25954.354 ms
-AGE Puntuacion Mejor: 545 Tiempo de ejecucion: 26199.982 ms
-AGG sin BLX, Puntuacion Mejor: 538 Tiempo de ejecucion: 13161.464 ms
-AGG con BLX, Puntuacion Mejor: 545 Tiempo de ejecucion: 20557.857 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 545 Tiempo de ejecucion: 26327.646 ms
-AGE Puntuacion Mejor: 545 Tiempo de ejecucion: 27080.523 ms
-AGG sin BLX, Puntuacion Mejor: 551 Tiempo de ejecucion: 13423.084 ms
-AGG con BLX, Puntuacion Mejor: 547 Tiempo de ejecucion: 20809.252 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 545 Tiempo de ejecucion: 25979.256 ms
-AGE Puntuacion Mejor: 545 Tiempo de ejecucion: 26580.092 ms
-AGG sin BLX, Puntuacion Mejor: 554 Tiempo de ejecucion: 12796.821 ms
-AGG con BLX, Puntuacion Mejor: 550 Tiempo de ejecucion: 20485.506 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 545 Tiempo de ejecucion: 25915.818 ms
-AGE Puntuacion Mejor: 545 Tiempo de ejecucion: 26076.773 ms
-AGG sin BLX, Puntuacion Mejor: 541 Tiempo de ejecucion: 12731.548 ms
-AGG con BLX, Puntuacion Mejor: 545 Tiempo de ejecucion: 20390.348 ms
+AGE Puntuacion Mejor: 322 Tiempo de ejecucion: 1031.7988 ms
+AGE Puntuacion Mejor: 322 Tiempo de ejecucion: 1342.1772 ms
+AGG sin BLX, Puntuacion Mejor: 285 Tiempo de ejecucion: 6157.2383 ms
+AGG con BLX, Puntuacion Mejor: 285 Tiempo de ejecucion: 9965.666 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
 ---------------------------------------------
-AGE Puntuacion Mejor: 570 Tiempo de ejecucion: 25452.871 ms
-AGE Puntuacion Mejor: 570 Tiempo de ejecucion: 25641.092 ms
-AGG sin BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 13199.475 ms
-AGG con BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 19989.004 ms
+AGE Puntuacion Mejor: 567 Tiempo de ejecucion: 2097.152 ms
+AGE Puntuacion Mejor: 567 Tiempo de ejecucion: 2776.6292 ms
+AGG sin BLX, Puntuacion Mejor: 546 Tiempo de ejecucion: 12691.964 ms
+AGG con BLX, Puntuacion Mejor: 545 Tiempo de ejecucion: 19444.793 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 570 Tiempo de ejecucion: 25419.055 ms
-AGE Puntuacion Mejor: 570 Tiempo de ejecucion: 26016.219 ms
-AGG sin BLX, Puntuacion Mejor: 568 Tiempo de ejecucion: 13151.765 ms
-AGG con BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 20196.36 ms
+AGE Puntuacion Mejor: 567 Tiempo de ejecucion: 2088.7634 ms
+AGE Puntuacion Mejor: 567 Tiempo de ejecucion: 2768.2407 ms
+AGG sin BLX, Puntuacion Mejor: 538 Tiempo de ejecucion: 12389.974 ms
+AGG con BLX, Puntuacion Mejor: 545 Tiempo de ejecucion: 19545.457 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 570 Tiempo de ejecucion: 25663.635 ms
-AGE Puntuacion Mejor: 570 Tiempo de ejecucion: 26206.273 ms
-AGG sin BLX, Puntuacion Mejor: 571 Tiempo de ejecucion: 13116.113 ms
-AGG con BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 20594.295 ms
+AGE Puntuacion Mejor: 565 Tiempo de ejecucion: 2097.152 ms
+AGE Puntuacion Mejor: 565 Tiempo de ejecucion: 2776.6292 ms
+AGG sin BLX, Puntuacion Mejor: 551 Tiempo de ejecucion: 12457.083 ms
+AGG con BLX, Puntuacion Mejor: 547 Tiempo de ejecucion: 19436.404 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 570 Tiempo de ejecucion: 25213.535 ms
-AGE Puntuacion Mejor: 570 Tiempo de ejecucion: 25685.393 ms
-AGG sin BLX, Puntuacion Mejor: 569 Tiempo de ejecucion: 12732.072 ms
-AGG con BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 19803.406 ms
+AGE Puntuacion Mejor: 567 Tiempo de ejecucion: 2097.152 ms
+AGE Puntuacion Mejor: 567 Tiempo de ejecucion: 2776.6292 ms
+AGG sin BLX, Puntuacion Mejor: 554 Tiempo de ejecucion: 12197.036 ms
+AGG con BLX, Puntuacion Mejor: 550 Tiempo de ejecucion: 20946.354 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 570 Tiempo de ejecucion: 25572.146 ms
-AGE Puntuacion Mejor: 570 Tiempo de ejecucion: 25693.258 ms
-AGG sin BLX, Puntuacion Mejor: 571 Tiempo de ejecucion: 12831.949 ms
-AGG con BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 19830.145 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
----------------------------------------------
-AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 44913.133 ms
-AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 45268.598 ms
-AGG sin BLX, Puntuacion Mejor: 1171 Tiempo de ejecucion: 22253.404 ms
-AGG con BLX, Puntuacion Mejor: 1173 Tiempo de ejecucion: 34449.914 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 44842.875 ms
-AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 45111.836 ms
-AGG sin BLX, Puntuacion Mejor: 1188 Tiempo de ejecucion: 22208.84 ms
-AGG con BLX, Puntuacion Mejor: 1191 Tiempo de ejecucion: 35189.16 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 45482.508 ms
-AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 46400.535 ms
-AGG sin BLX, Puntuacion Mejor: 1186 Tiempo de ejecucion: 22326.805 ms
-AGG con BLX, Puntuacion Mejor: 1184 Tiempo de ejecucion: 35724.46 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 44968.707 ms
-AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 46190.297 ms
-AGG sin BLX, Puntuacion Mejor: 1188 Tiempo de ejecucion: 22777.691 ms
-AGG con BLX, Puntuacion Mejor: 1173 Tiempo de ejecucion: 35360.08 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 45972.72 ms
-AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 45792.363 ms
-AGG sin BLX, Puntuacion Mejor: 1158 Tiempo de ejecucion: 22587.9 ms
-AGG con BLX, Puntuacion Mejor: 1173 Tiempo de ejecucion: 34940.125 ms
+AGE Puntuacion Mejor: 572 Tiempo de ejecucion: 2122.3179 ms
+AGE Puntuacion Mejor: 572 Tiempo de ejecucion: 2818.5723 ms
+AGG sin BLX, Puntuacion Mejor: 541 Tiempo de ejecucion: 12348.031 ms
+AGG con BLX, Puntuacion Mejor: 545 Tiempo de ejecucion: 19453.182 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
 ---------------------------------------------
-AGE Puntuacion Mejor: 1384 Tiempo de ejecucion: 48912.4 ms
-AGE Puntuacion Mejor: 1384 Tiempo de ejecucion: 49426.203 ms
-AGG sin BLX, Puntuacion Mejor: 1358 Tiempo de ejecucion: 23633.854 ms
-AGG con BLX, Puntuacion Mejor: 1389 Tiempo de ejecucion: 38328.074 ms
+AGE Puntuacion Mejor: 594 Tiempo de ejecucion: 2130.7065 ms
+AGE Puntuacion Mejor: 594 Tiempo de ejecucion: 2759.852 ms
+AGG sin BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 12859.736 ms
+AGG con BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 19075.695 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1384 Tiempo de ejecucion: 49280.977 ms
-AGE Puntuacion Mejor: 1384 Tiempo de ejecucion: 49784.293 ms
-AGG sin BLX, Puntuacion Mejor: 1386 Tiempo de ejecucion: 24617.418 ms
-AGG con BLX, Puntuacion Mejor: 1386 Tiempo de ejecucion: 38409.34 ms
+AGE Puntuacion Mejor: 612 Tiempo de ejecucion: 2122.3179 ms
+AGE Puntuacion Mejor: 615 Tiempo de ejecucion: 2751.4634 ms
+AGG sin BLX, Puntuacion Mejor: 568 Tiempo de ejecucion: 12616.467 ms
+AGG con BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 19293.799 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1386 Tiempo de ejecucion: 49237.457 ms
-AGE Puntuacion Mejor: 1386 Tiempo de ejecucion: 49869.75 ms
-AGG sin BLX, Puntuacion Mejor: 1384 Tiempo de ejecucion: 24820.842 ms
-AGG con BLX, Puntuacion Mejor: 1386 Tiempo de ejecucion: 39172.18 ms
+AGE Puntuacion Mejor: 588 Tiempo de ejecucion: 2306.8672 ms
+AGE Puntuacion Mejor: 615 Tiempo de ejecucion: 2868.904 ms
+AGG sin BLX, Puntuacion Mejor: 571 Tiempo de ejecucion: 12322.865 ms
+AGG con BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 18849.203 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1384 Tiempo de ejecucion: 48744.105 ms
-AGE Puntuacion Mejor: 1384 Tiempo de ejecucion: 49561.47 ms
-AGG sin BLX, Puntuacion Mejor: 1375 Tiempo de ejecucion: 23713.547 ms
-AGG con BLX, Puntuacion Mejor: 1390 Tiempo de ejecucion: 38536.742 ms
+AGE Puntuacion Mejor: 586 Tiempo de ejecucion: 2298.4785 ms
+AGE Puntuacion Mejor: 606 Tiempo de ejecucion: 2785.0178 ms
+AGG sin BLX, Puntuacion Mejor: 569 Tiempo de ejecucion: 12213.813 ms
+AGG con BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 19075.695 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1384 Tiempo de ejecucion: 49214.914 ms
-AGE Puntuacion Mejor: 1384 Tiempo de ejecucion: 51203.016 ms
-AGG sin BLX, Puntuacion Mejor: 1375 Tiempo de ejecucion: 24994.906 ms
-AGG con BLX, Puntuacion Mejor: 1384 Tiempo de ejecucion: 39269.17 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
----------------------------------------------
-AGE Puntuacion Mejor: 2228 Tiempo de ejecucion: 64866.484 ms
-AGE Puntuacion Mejor: 2230 Tiempo de ejecucion: 66047.18 ms
-AGG sin BLX, Puntuacion Mejor: 2181 Tiempo de ejecucion: 31345.607 ms
-AGG con BLX, Puntuacion Mejor: 2236 Tiempo de ejecucion: 51786.023 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 2230 Tiempo de ejecucion: 65473.086 ms
-AGE Puntuacion Mejor: 2230 Tiempo de ejecucion: 65183.152 ms
-AGG sin BLX, Puntuacion Mejor: 2134 Tiempo de ejecucion: 31942.771 ms
-AGG con BLX, Puntuacion Mejor: 2230 Tiempo de ejecucion: 49845.11 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 2203 Tiempo de ejecucion: 64158.695 ms
-AGE Puntuacion Mejor: 2218 Tiempo de ejecucion: 65063.094 ms
-AGG sin BLX, Puntuacion Mejor: 2126 Tiempo de ejecucion: 32723.436 ms
-AGG con BLX, Puntuacion Mejor: 2218 Tiempo de ejecucion: 49838.816 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 2173 Tiempo de ejecucion: 63693.13 ms
-AGE Puntuacion Mejor: 2229 Tiempo de ejecucion: 64386.76 ms
-AGG sin BLX, Puntuacion Mejor: 2123 Tiempo de ejecucion: 31174.164 ms
-AGG con BLX, Puntuacion Mejor: 2229 Tiempo de ejecucion: 49524.77 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 2190 Tiempo de ejecucion: 63584.6 ms
-AGE Puntuacion Mejor: 2230 Tiempo de ejecucion: 64262.504 ms
-AGG sin BLX, Puntuacion Mejor: 2124 Tiempo de ejecucion: 31461.998 ms
-AGG con BLX, Puntuacion Mejor: 2231 Tiempo de ejecucion: 51471.45 ms
+AGE Puntuacion Mejor: 578 Tiempo de ejecucion: 2113.9292 ms
+AGE Puntuacion Mejor: 578 Tiempo de ejecucion: 2759.852 ms
+AGG sin BLX, Puntuacion Mejor: 571 Tiempo de ejecucion: 12725.519 ms
+AGG con BLX, Puntuacion Mejor: 570 Tiempo de ejecucion: 19511.902 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
 ---------------------------------------------
-AGE Puntuacion Mejor: 342 Tiempo de ejecucion: 19466.812 ms
-AGE Puntuacion Mejor: 342 Tiempo de ejecucion: 19445.842 ms
-AGG sin BLX, Puntuacion Mejor: 343 Tiempo de ejecucion: 12081.692 ms
-AGG con BLX, Puntuacion Mejor: 345 Tiempo de ejecucion: 15348.007 ms
+AGE Puntuacion Mejor: 1215 Tiempo de ejecucion: 3774.8735 ms
+AGE Puntuacion Mejor: 1215 Tiempo de ejecucion: 4966.056 ms
+AGG sin BLX, Puntuacion Mejor: 1171 Tiempo de ejecucion: 22179.48 ms
+AGG con BLX, Puntuacion Mejor: 1173 Tiempo de ejecucion: 34158.41 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 351 Tiempo de ejecucion: 19520.291 ms
-AGE Puntuacion Mejor: 351 Tiempo de ejecucion: 19425.92 ms
-AGG sin BLX, Puntuacion Mejor: 349 Tiempo de ejecucion: 12090.081 ms
-AGG con BLX, Puntuacion Mejor: 351 Tiempo de ejecucion: 15039.726 ms
+AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 3783.2622 ms
+AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 4915.724 ms
+AGG sin BLX, Puntuacion Mejor: 1188 Tiempo de ejecucion: 21911.045 ms
+AGG con BLX, Puntuacion Mejor: 1191 Tiempo de ejecucion: 34762.39 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 342 Tiempo de ejecucion: 18970.838 ms
-AGE Puntuacion Mejor: 342 Tiempo de ejecucion: 19003.344 ms
-AGG sin BLX, Puntuacion Mejor: 310 Tiempo de ejecucion: 11314.135 ms
-AGG con BLX, Puntuacion Mejor: 342 Tiempo de ejecucion: 15134.098 ms
+AGE Puntuacion Mejor: 1197 Tiempo de ejecucion: 3674.2102 ms
+AGE Puntuacion Mejor: 1197 Tiempo de ejecucion: 4857.004 ms
+AGG sin BLX, Puntuacion Mejor: 1186 Tiempo de ejecucion: 21500.002 ms
+AGG con BLX, Puntuacion Mejor: 1184 Tiempo de ejecucion: 34007.418 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 342 Tiempo de ejecucion: 18994.43 ms
-AGE Puntuacion Mejor: 342 Tiempo de ejecucion: 19018.547 ms
-AGG sin BLX, Puntuacion Mejor: 338 Tiempo de ejecucion: 11576.804 ms
-AGG con BLX, Puntuacion Mejor: 342 Tiempo de ejecucion: 15024.521 ms
+AGE Puntuacion Mejor: 1198 Tiempo de ejecucion: 3674.2102 ms
+AGE Puntuacion Mejor: 1198 Tiempo de ejecucion: 4789.895 ms
+AGG sin BLX, Puntuacion Mejor: 1188 Tiempo de ejecucion: 21760.049 ms
+AGG con BLX, Puntuacion Mejor: 1173 Tiempo de ejecucion: 34292.63 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 342 Tiempo de ejecucion: 18870.697 ms
-AGE Puntuacion Mejor: 342 Tiempo de ejecucion: 18904.777 ms
-AGG sin BLX, Puntuacion Mejor: 341 Tiempo de ejecucion: 11695.292 ms
-AGG con BLX, Puntuacion Mejor: 345 Tiempo de ejecucion: 15150.875 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
----------------------------------------------
-AGE Puntuacion Mejor: 793 Tiempo de ejecucion: 39558.055 ms
-AGE Puntuacion Mejor: 793 Tiempo de ejecucion: 39781.926 ms
-AGG sin BLX, Puntuacion Mejor: 785 Tiempo de ejecucion: 21415.068 ms
-AGG con BLX, Puntuacion Mejor: 799 Tiempo de ejecucion: 31945.916 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 791 Tiempo de ejecucion: 41311.273 ms
-AGE Puntuacion Mejor: 791 Tiempo de ejecucion: 41426.094 ms
-AGG sin BLX, Puntuacion Mejor: 784 Tiempo de ejecucion: 20769.145 ms
-AGG con BLX, Puntuacion Mejor: 791 Tiempo de ejecucion: 31998.87 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 791 Tiempo de ejecucion: 41508.406 ms
-AGE Puntuacion Mejor: 791 Tiempo de ejecucion: 41623.75 ms
-AGG sin BLX, Puntuacion Mejor: 789 Tiempo de ejecucion: 20894.975 ms
-AGG con BLX, Puntuacion Mejor: 791 Tiempo de ejecucion: 32241.615 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 793 Tiempo de ejecucion: 41579.707 ms
-AGE Puntuacion Mejor: 793 Tiempo de ejecucion: 41713.926 ms
-AGG sin BLX, Puntuacion Mejor: 791 Tiempo de ejecucion: 20451.951 ms
-AGG con BLX, Puntuacion Mejor: 793 Tiempo de ejecucion: 31310.479 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 791 Tiempo de ejecucion: 39650.33 ms
-AGE Puntuacion Mejor: 791 Tiempo de ejecucion: 39645.086 ms
-AGG sin BLX, Puntuacion Mejor: 787 Tiempo de ejecucion: 19070.451 ms
-AGG con BLX, Puntuacion Mejor: 791 Tiempo de ejecucion: 29403.645 ms
+AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 4001.366 ms
+AGE Puntuacion Mejor: 1173 Tiempo de ejecucion: 4865.3926 ms
+AGG sin BLX, Puntuacion Mejor: 1158 Tiempo de ejecucion: 22028.484 ms
+AGG con BLX, Puntuacion Mejor: 1173 Tiempo de ejecucion: 34594.62 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
 ---------------------------------------------
-AGE Puntuacion Mejor: 2527 Tiempo de ejecucion: 69354.914 ms
-AGE Puntuacion Mejor: 2527 Tiempo de ejecucion: 69866.09 ms
-AGG sin BLX, Puntuacion Mejor: 2406 Tiempo de ejecucion: 33234.094 ms
-AGG con BLX, Puntuacion Mejor: 2527 Tiempo de ejecucion: 56211.01 ms
+AGE Puntuacion Mejor: 1410 Tiempo de ejecucion: 3967.8115 ms
+AGE Puntuacion Mejor: 1410 Tiempo de ejecucion: 5117.051 ms
+AGG sin BLX, Puntuacion Mejor: 1358 Tiempo de ejecucion: 22959.62 ms
+AGG con BLX, Puntuacion Mejor: 1389 Tiempo de ejecucion: 36641.44 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 2523 Tiempo de ejecucion: 75468.63 ms
-AGE Puntuacion Mejor: 2532 Tiempo de ejecucion: 72982.984 ms
-AGG sin BLX, Puntuacion Mejor: 2401 Tiempo de ejecucion: 33128.71 ms
-AGG con BLX, Puntuacion Mejor: 2532 Tiempo de ejecucion: 54569.992 ms
+AGE Puntuacion Mejor: 1401 Tiempo de ejecucion: 3900.7026 ms
+AGE Puntuacion Mejor: 1401 Tiempo de ejecucion: 4999.6104 ms
+AGG sin BLX, Puntuacion Mejor: 1386 Tiempo de ejecucion: 23806.87 ms
+AGG con BLX, Puntuacion Mejor: 1386 Tiempo de ejecucion: 36918.266 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 2530 Tiempo de ejecucion: 74812.23 ms
-AGE Puntuacion Mejor: 2530 Tiempo de ejecucion: 74920.76 ms
-AGG sin BLX, Puntuacion Mejor: 2430 Tiempo de ejecucion: 34913.91 ms
-AGG con BLX, Puntuacion Mejor: 2530 Tiempo de ejecucion: 58076.953 ms
+AGE Puntuacion Mejor: 1411 Tiempo de ejecucion: 3942.6458 ms
+AGE Puntuacion Mejor: 1411 Tiempo de ejecucion: 5041.553 ms
+AGG sin BLX, Puntuacion Mejor: 1384 Tiempo de ejecucion: 23915.922 ms
+AGG con BLX, Puntuacion Mejor: 1386 Tiempo de ejecucion: 37111.203 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 2514 Tiempo de ejecucion: 74445.75 ms
-AGE Puntuacion Mejor: 2530 Tiempo de ejecucion: 75401.0 ms
-AGG sin BLX, Puntuacion Mejor: 2417 Tiempo de ejecucion: 35425.09 ms
-AGG con BLX, Puntuacion Mejor: 2532 Tiempo de ejecucion: 57476.645 ms
+AGE Puntuacion Mejor: 1412 Tiempo de ejecucion: 3883.9255 ms
+AGE Puntuacion Mejor: 1412 Tiempo de ejecucion: 5041.553 ms
+AGG sin BLX, Puntuacion Mejor: 1375 Tiempo de ejecucion: 23043.506 ms
+AGG con BLX, Puntuacion Mejor: 1390 Tiempo de ejecucion: 37757.125 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 2496 Tiempo de ejecucion: 75690.41 ms
-AGE Puntuacion Mejor: 2530 Tiempo de ejecucion: 76200.016 ms
-AGG sin BLX, Puntuacion Mejor: 2406 Tiempo de ejecucion: 36439.066 ms
-AGG con BLX, Puntuacion Mejor: 2534 Tiempo de ejecucion: 57634.98 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
----------------------------------------------
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 56794.023 ms
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 56763.613 ms
-AGG sin BLX, Puntuacion Mejor: 1207 Tiempo de ejecucion: 29431.432 ms
-AGG con BLX, Puntuacion Mejor: 1211 Tiempo de ejecucion: 43767.562 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1211 Tiempo de ejecucion: 56107.203 ms
-AGE Puntuacion Mejor: 1211 Tiempo de ejecucion: 54247.03 ms
-AGG sin BLX, Puntuacion Mejor: 1214 Tiempo de ejecucion: 26581.402 ms
-AGG con BLX, Puntuacion Mejor: 1211 Tiempo de ejecucion: 40964.72 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1209 Tiempo de ejecucion: 52750.71 ms
-AGE Puntuacion Mejor: 1209 Tiempo de ejecucion: 52997.13 ms
-AGG sin BLX, Puntuacion Mejor: 1207 Tiempo de ejecucion: 26417.824 ms
-AGG con BLX, Puntuacion Mejor: 1209 Tiempo de ejecucion: 41266.707 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 52534.707 ms
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 53014.953 ms
-AGG sin BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 26685.21 ms
-AGG con BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 41360.03 ms
-<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 52646.902 ms
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 53113.52 ms
-AGG sin BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 27128.758 ms
-AGG con BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 41093.695 ms
+AGE Puntuacion Mejor: 1397 Tiempo de ejecucion: 3951.0344 ms
+AGE Puntuacion Mejor: 1397 Tiempo de ejecucion: 5007.999 ms
+AGG sin BLX, Puntuacion Mejor: 1375 Tiempo de ejecucion: 23177.725 ms
+AGG con BLX, Puntuacion Mejor: 1384 Tiempo de ejecucion: 36532.387 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
 ---------------------------------------------
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 52721.35 ms
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 53258.223 ms
-AGG sin BLX, Puntuacion Mejor: 1207 Tiempo de ejecucion: 27453.816 ms
-AGG con BLX, Puntuacion Mejor: 1211 Tiempo de ejecucion: 41212.184 ms
+AGE Puntuacion Mejor: 2244 Tiempo de ejecucion: 5872.0254 ms
+AGE Puntuacion Mejor: 2338 Tiempo de ejecucion: 6811.55 ms
+AGG sin BLX, Puntuacion Mejor: 2181 Tiempo de ejecucion: 30022.828 ms
+AGG con BLX, Puntuacion Mejor: 2236 Tiempo de ejecucion: 48981.082 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1211 Tiempo de ejecucion: 52749.664 ms
-AGE Puntuacion Mejor: 1211 Tiempo de ejecucion: 53136.59 ms
-AGG sin BLX, Puntuacion Mejor: 1214 Tiempo de ejecucion: 26641.17 ms
-AGG con BLX, Puntuacion Mejor: 1211 Tiempo de ejecucion: 41105.227 ms
+AGE Puntuacion Mejor: 2249 Tiempo de ejecucion: 5351.932 ms
+AGE Puntuacion Mejor: 2249 Tiempo de ejecucion: 6744.441 ms
+AGG sin BLX, Puntuacion Mejor: 2134 Tiempo de ejecucion: 31314.674 ms
+AGG con BLX, Puntuacion Mejor: 2230 Tiempo de ejecucion: 49257.906 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1209 Tiempo de ejecucion: 52805.24 ms
-AGE Puntuacion Mejor: 1209 Tiempo de ejecucion: 53095.695 ms
-AGG sin BLX, Puntuacion Mejor: 1207 Tiempo de ejecucion: 26415.727 ms
-AGG con BLX, Puntuacion Mejor: 1209 Tiempo de ejecucion: 41270.902 ms
+AGE Puntuacion Mejor: 2266 Tiempo de ejecucion: 5343.5435 ms
+AGE Puntuacion Mejor: 2266 Tiempo de ejecucion: 6719.275 ms
+AGG sin BLX, Puntuacion Mejor: 2126 Tiempo de ejecucion: 31876.71 ms
+AGG con BLX, Puntuacion Mejor: 2218 Tiempo de ejecucion: 47999.613 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 52653.195 ms
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 53146.027 ms
-AGG sin BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 26417.824 ms
-AGG con BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 41072.723 ms
+AGE Puntuacion Mejor: 2241 Tiempo de ejecucion: 5595.2017 ms
+AGE Puntuacion Mejor: 2284 Tiempo de ejecucion: 6719.275 ms
+AGG sin BLX, Puntuacion Mejor: 2123 Tiempo de ejecucion: 30324.818 ms
+AGG con BLX, Puntuacion Mejor: 2229 Tiempo de ejecucion: 48142.223 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 52736.03 ms
-AGE Puntuacion Mejor: 1210 Tiempo de ejecucion: 53108.277 ms
-AGG sin BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 27094.154 ms
-AGG con BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 41009.81 ms
+AGE Puntuacion Mejor: 2257 Tiempo de ejecucion: 5410.6523 ms
+AGE Puntuacion Mejor: 2257 Tiempo de ejecucion: 6828.327 ms
+AGG sin BLX, Puntuacion Mejor: 2124 Tiempo de ejecucion: 30484.201 ms
+AGG con BLX, Puntuacion Mejor: 2231 Tiempo de ejecucion: 49056.58 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+---------------------------------------------
+AGE Puntuacion Mejor: 351 Tiempo de ejecucion: 3472.8838 ms
+AGE Puntuacion Mejor: 398 Tiempo de ejecucion: 1677.7216 ms
+AGG sin BLX, Puntuacion Mejor: 343 Tiempo de ejecucion: 11425.284 ms
+AGG con BLX, Puntuacion Mejor: 345 Tiempo de ejecucion: 14571.012 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 360 Tiempo de ejecucion: 2709.5203 ms
+AGE Puntuacion Mejor: 390 Tiempo de ejecucion: 1644.1671 ms
+AGG sin BLX, Puntuacion Mejor: 349 Tiempo de ejecucion: 11307.844 ms
+AGG con BLX, Puntuacion Mejor: 351 Tiempo de ejecucion: 14260.634 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 373 Tiempo de ejecucion: 1350.5659 ms
+AGE Puntuacion Mejor: 384 Tiempo de ejecucion: 1627.3899 ms
+AGG sin BLX, Puntuacion Mejor: 310 Tiempo de ejecucion: 11039.408 ms
+AGG con BLX, Puntuacion Mejor: 342 Tiempo de ejecucion: 14755.562 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 366 Tiempo de ejecucion: 3145.728 ms
+AGE Puntuacion Mejor: 396 Tiempo de ejecucion: 1551.8925 ms
+AGG sin BLX, Puntuacion Mejor: 338 Tiempo de ejecucion: 11182.015 ms
+AGG con BLX, Puntuacion Mejor: 342 Tiempo de ejecucion: 14722.007 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 384 Tiempo de ejecucion: 1904.214 ms
+AGE Puntuacion Mejor: 409 Tiempo de ejecucion: 1543.5039 ms
+AGG sin BLX, Puntuacion Mejor: 341 Tiempo de ejecucion: 11349.787 ms
+AGG con BLX, Puntuacion Mejor: 345 Tiempo de ejecucion: 14554.235 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+---------------------------------------------
+AGE Puntuacion Mejor: 845 Tiempo de ejecucion: 2751.4634 ms
+AGE Puntuacion Mejor: 845 Tiempo de ejecucion: 3212.837 ms
+AGG sin BLX, Puntuacion Mejor: 785 Tiempo de ejecucion: 20635.977 ms
+AGG con BLX, Puntuacion Mejor: 799 Tiempo de ejecucion: 29737.615 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 852 Tiempo de ejecucion: 2952.79 ms
+AGE Puntuacion Mejor: 852 Tiempo de ejecucion: 3204.4482 ms
+AGG sin BLX, Puntuacion Mejor: 784 Tiempo de ejecucion: 19428.016 ms
+AGG con BLX, Puntuacion Mejor: 791 Tiempo de ejecucion: 29678.895 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 853 Tiempo de ejecucion: 2969.5671 ms
+AGE Puntuacion Mejor: 853 Tiempo de ejecucion: 3263.1685 ms
+AGG sin BLX, Puntuacion Mejor: 789 Tiempo de ejecucion: 19730.006 ms
+AGG con BLX, Puntuacion Mejor: 791 Tiempo de ejecucion: 28965.863 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 866 Tiempo de ejecucion: 2743.0747 ms
+AGE Puntuacion Mejor: 866 Tiempo de ejecucion: 3179.2825 ms
+AGG sin BLX, Puntuacion Mejor: 791 Tiempo de ejecucion: 18958.254 ms
+AGG con BLX, Puntuacion Mejor: 793 Tiempo de ejecucion: 29485.957 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 862 Tiempo de ejecucion: 2709.5203 ms
+AGE Puntuacion Mejor: 862 Tiempo de ejecucion: 3087.0078 ms
+AGG sin BLX, Puntuacion Mejor: 787 Tiempo de ejecucion: 18505.27 ms
+AGG con BLX, Puntuacion Mejor: 791 Tiempo de ejecucion: 28387.049 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+---------------------------------------------
+AGE Puntuacion Mejor: 2553 Tiempo de ejecucion: 5620.367 ms
+AGE Puntuacion Mejor: 2697 Tiempo de ejecucion: 6803.161 ms
+AGG sin BLX, Puntuacion Mejor: 2406 Tiempo de ejecucion: 33344.72 ms
+AGG con BLX, Puntuacion Mejor: 2527 Tiempo de ejecucion: 53083.113 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 2624 Tiempo de ejecucion: 5528.093 ms
+AGE Puntuacion Mejor: 2630 Tiempo de ejecucion: 6601.8345 ms
+AGG sin BLX, Puntuacion Mejor: 2401 Tiempo de ejecucion: 30962.352 ms
+AGG con BLX, Puntuacion Mejor: 2532 Tiempo de ejecucion: 51413.777 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 2642 Tiempo de ejecucion: 5402.2637 ms
+AGE Puntuacion Mejor: 2831 Tiempo de ejecucion: 6425.674 ms
+AGG sin BLX, Puntuacion Mejor: 2430 Tiempo de ejecucion: 31482.445 ms
+AGG con BLX, Puntuacion Mejor: 2530 Tiempo de ejecucion: 52193.918 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 2538 Tiempo de ejecucion: 5427.429 ms
+AGE Puntuacion Mejor: 2538 Tiempo de ejecucion: 6459.228 ms
+AGG sin BLX, Puntuacion Mejor: 2417 Tiempo de ejecucion: 31499.223 ms
+AGG con BLX, Puntuacion Mejor: 2532 Tiempo de ejecucion: 51304.727 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 2642 Tiempo de ejecucion: 5385.4863 ms
+AGE Puntuacion Mejor: 2761 Tiempo de ejecucion: 6417.285 ms
+AGG sin BLX, Puntuacion Mejor: 2406 Tiempo de ejecucion: 32614.908 ms
+AGG con BLX, Puntuacion Mejor: 2534 Tiempo de ejecucion: 52982.45 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+---------------------------------------------
+AGE Puntuacion Mejor: 1246 Tiempo de ejecucion: 3858.7598 ms
+AGE Puntuacion Mejor: 1246 Tiempo de ejecucion: 4605.3457 ms
+AGG sin BLX, Puntuacion Mejor: 1207 Tiempo de ejecucion: 26264.732 ms
+AGG con BLX, Puntuacion Mejor: 1211 Tiempo de ejecucion: 39300.63 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 1251 Tiempo de ejecucion: 3841.9824 ms
+AGE Puntuacion Mejor: 1259 Tiempo de ejecucion: 4588.5684 ms
+AGG sin BLX, Puntuacion Mejor: 1214 Tiempo de ejecucion: 26289.898 ms
+AGG con BLX, Puntuacion Mejor: 1211 Tiempo de ejecucion: 39392.902 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 1237 Tiempo de ejecucion: 4269.8013 ms
+AGE Puntuacion Mejor: 1241 Tiempo de ejecucion: 4630.5117 ms
+AGG sin BLX, Puntuacion Mejor: 1207 Tiempo de ejecucion: 25442.648 ms
+AGG con BLX, Puntuacion Mejor: 1209 Tiempo de ejecucion: 39669.727 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 1218 Tiempo de ejecucion: 3858.7598 ms
+AGE Puntuacion Mejor: 1218 Tiempo de ejecucion: 4588.5684 ms
+AGG sin BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 25459.426 ms
+AGG con BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 39292.24 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 1245 Tiempo de ejecucion: 3816.8167 ms
+AGE Puntuacion Mejor: 1245 Tiempo de ejecucion: 4613.7344 ms
+AGG sin BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 26096.959 ms
+AGG con BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 40567.31 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+---------------------------------------------
+AGE Puntuacion Mejor: 1246 Tiempo de ejecucion: 3833.5938 ms
+AGE Puntuacion Mejor: 1246 Tiempo de ejecucion: 4596.957 ms
+AGG sin BLX, Puntuacion Mejor: 1207 Tiempo de ejecucion: 26256.344 ms
+AGG con BLX, Puntuacion Mejor: 1211 Tiempo de ejecucion: 40525.367 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 1251 Tiempo de ejecucion: 3833.5938 ms
+AGE Puntuacion Mejor: 1259 Tiempo de ejecucion: 4605.3457 ms
+AGG sin BLX, Puntuacion Mejor: 1214 Tiempo de ejecucion: 25677.53 ms
+AGG con BLX, Puntuacion Mejor: 1211 Tiempo de ejecucion: 39342.57 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 1237 Tiempo de ejecucion: 4269.8013 ms
+AGE Puntuacion Mejor: 1241 Tiempo de ejecucion: 4647.289 ms
+AGG sin BLX, Puntuacion Mejor: 1207 Tiempo de ejecucion: 25484.592 ms
+AGG con BLX, Puntuacion Mejor: 1209 Tiempo de ejecucion: 39594.23 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 1218 Tiempo de ejecucion: 3850.371 ms
+AGE Puntuacion Mejor: 1218 Tiempo de ejecucion: 4596.957 ms
+AGG sin BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 25509.758 ms
+AGG con BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 39392.902 ms
+<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+AGE Puntuacion Mejor: 1245 Tiempo de ejecucion: 3825.2053 ms
+AGE Puntuacion Mejor: 1245 Tiempo de ejecucion: 4588.5684 ms
+AGG sin BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 26155.68 ms
+AGG con BLX, Puntuacion Mejor: 1210 Tiempo de ejecucion: 39384.516 ms
 <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
 
 Process finished with exit code 0
