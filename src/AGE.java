@@ -119,14 +119,9 @@ public class AGE {
 
             //System.out.println("Puntuacion Mejor: " + mayor + " Generacion: " + generacion+" Media: "+puntuacionNuevaGeneracion);
 
-            if (mejorAnterior >= mejorNuevaGeneracion) {
-                ++generacionesSinMejora;
-            } else {
-                generacionesSinMejora = 0;
-            }
 
             //Reinicializamos si no mejoramos en 20 generacion o el 80% de los individuos son el mismo
-            if (generacionesSinMejora >= 20 || (puntuaciones.size() <= poblacion.size() * 0.2)) {
+            if ((puntuaciones.size() <= poblacion.size() * 0.2)) {
                 generacionesSinMejora = 0;
 
                 Solucion mejor;
